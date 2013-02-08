@@ -1,0 +1,258 @@
+<mockup version="1.0" skin="wireframe" fontFace="Balsamiq Sans" measuredW="1096" measuredH="602" mockupW="800" mockupH="600">
+  <controls>
+    <control controlID="73" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="296" y="2" w="800" h="600" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//</text>
+      </controlProperties>
+    </control>
+    <control controlID="74" controlTypeID="com.balsamiq.mockups::IconLabel" x="324" y="105" w="-1" h="-1" measuredW="99" measuredH="63" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>UsersIcon%7Clarge</icon>
+        <text>VouCasar.com.br</text>
+      </controlProperties>
+    </control>
+    <control controlID="97" controlTypeID="com.balsamiq.mockups::LinkBar" x="573" y="105" w="-1" h="-1" measuredW="390" measuredH="19" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>-1</selectedIndex>
+        <text>Inicio%2C%20Planejamento%2C%20Convidados%2C%20Financeiro%2C%20Blog%2C%20Sair</text>
+      </controlProperties>
+    </control>
+    <control controlID="98" controlTypeID="com.balsamiq.mockups::FieldSet" x="309" y="192" w="249" h="395" measuredW="200" measuredH="170" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Importante</text>
+      </controlProperties>
+    </control>
+    <control controlID="99" controlTypeID="com.balsamiq.mockups::FieldSet" x="573" y="192" w="249" h="189" measuredW="200" measuredH="170" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%DAltimas%20Atualiza%E7%F5es</text>
+      </controlProperties>
+    </control>
+    <control controlID="100" controlTypeID="com.balsamiq.mockups::FieldSet" x="835" y="192" w="249" h="189" measuredW="200" measuredH="170" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Convidados</text>
+      </controlProperties>
+    </control>
+    <control controlID="101" controlTypeID="com.balsamiq.mockups::IconLabel" x="588" y="218" w="-1" h="-1" measuredW="177" measuredH="21" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2101837</color>
+        <icon>ContactIcon%7Cxsmall</icon>
+        <labelPosition>right</labelPosition>
+        <text>Fulano%20confirmou%20presen%E7a</text>
+      </controlProperties>
+    </control>
+    <control controlID="102" controlTypeID="com.balsamiq.mockups::IconLabel" x="588" y="245" w="-1" h="-1" measuredW="161" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2101837</color>
+        <icon>CameraIcon%7Cxsmall</icon>
+        <labelPosition>right</labelPosition>
+        <text>Fotografo%20foi%20confirmado</text>
+      </controlProperties>
+    </control>
+    <control controlID="103" controlTypeID="com.balsamiq.mockups::IconLabel" x="336" y="265" w="-1" h="-1" measuredW="113" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2101837</color>
+        <icon>CalendarIcon%7Cxsmall</icon>
+        <labelPosition>right</labelPosition>
+        <text>Reservar%20Igreja</text>
+      </controlProperties>
+    </control>
+    <control controlID="104" controlTypeID="com.balsamiq.mockups::IconLabel" x="336" y="292" w="-1" h="-1" measuredW="185" measuredH="21" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2101837</color>
+        <icon>DollarIcon%7Cxsmall</icon>
+        <labelPosition>right</labelPosition>
+        <text>Parcela%203%20do%20Local%20da%20Festa</text>
+      </controlProperties>
+    </control>
+    <control controlID="108" controlTypeID="__group__" x="318" y="245" w="227" h="21" measuredW="227" measuredH="21" zOrder="10" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="-1" h="-1" measuredW="68" measuredH="21" zOrder="0" locked="false" isInGroup="108">
+          <controlProperties>
+            <bold>true</bold>
+            <color>10027008</color>
+            <text>Neste%20m%EAs</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::HRule" x="72" y="7" w="155" h="-1" measuredW="100" measuredH="10" zOrder="1" locked="false" isInGroup="108"/>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="109" controlTypeID="__group__" x="322" y="328" w="227" h="21" measuredW="227" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="-1" h="-1" measuredW="57" measuredH="21" zOrder="0" locked="false" isInGroup="109">
+          <controlProperties>
+            <bold>true</bold>
+            <color>10027008</color>
+            <text>Fevereiro</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::HRule" x="63" y="7" w="164" h="-1" measuredW="100" measuredH="10" zOrder="1" locked="false" isInGroup="109"/>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="110" controlTypeID="com.balsamiq.mockups::IconLabel" x="336" y="349" w="-1" h="-1" measuredW="97" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2101837</color>
+        <icon>CalendarIcon%7Cxsmall</icon>
+        <labelPosition>right</labelPosition>
+        <text>Contratar%20DJ</text>
+      </controlProperties>
+    </control>
+    <control controlID="111" controlTypeID="com.balsamiq.mockups::IconLabel" x="336" y="376" w="-1" h="-1" measuredW="112" measuredH="21" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2101837</color>
+        <icon>DollarIcon%7Cxsmall</icon>
+        <labelPosition>right</labelPosition>
+        <text>Pagar%20Fot%F3grafo</text>
+      </controlProperties>
+    </control>
+    <control controlID="112" controlTypeID="com.balsamiq.mockups::IconLabel" x="850" y="238" w="-1" h="-1" measuredW="164" measuredH="21" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2101837</color>
+        <icon>GMailIcon%7Cxsmall</icon>
+        <labelPosition>right</labelPosition>
+        <text>Convites%20Entregues%3A%20150</text>
+      </controlProperties>
+    </control>
+    <control controlID="113" controlTypeID="com.balsamiq.mockups::IconLabel" x="850" y="266" w="-1" h="-1" measuredW="116" measuredH="21" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2101837</color>
+        <icon>ThumbsUpIcon%7Cxsmall</icon>
+        <labelPosition>right</labelPosition>
+        <text>Confirmados%3A%2050</text>
+      </controlProperties>
+    </control>
+    <control controlID="114" controlTypeID="com.balsamiq.mockups::IconLabel" x="850" y="295" w="-1" h="-1" measuredW="124" measuredH="21" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2101837</color>
+        <icon>HelpIcon%7Cxsmall</icon>
+        <labelPosition>right</labelPosition>
+        <text>Sem%20resposta%3A%2050</text>
+      </controlProperties>
+    </control>
+    <control controlID="115" controlTypeID="com.balsamiq.mockups::IconLabel" x="850" y="323" w="-1" h="-1" measuredW="140" measuredH="21" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2101837</color>
+        <icon>ThumbsDownIcon%7Cxsmall</icon>
+        <labelPosition>right</labelPosition>
+        <text>N%E3o%20confirmados%3A%2030</text>
+      </controlProperties>
+    </control>
+    <control controlID="116" controlTypeID="com.balsamiq.mockups::IconLabel" x="850" y="213" w="-1" h="-1" measuredW="79" measuredH="21" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2101837</color>
+        <icon>UsersIcon%7Cxsmall</icon>
+        <labelPosition>right</labelPosition>
+        <text>Total%3A%20230</text>
+      </controlProperties>
+    </control>
+    <control controlID="117" controlTypeID="com.balsamiq.mockups::FieldSet" x="573" y="387" w="249" h="199" measuredW="200" measuredH="170" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Planejamento</text>
+      </controlProperties>
+    </control>
+    <control controlID="118" controlTypeID="com.balsamiq.mockups::IconLabel" x="588" y="274" w="-1" h="-1" measuredW="182" measuredH="21" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2101837</color>
+        <icon>ChartLineIcon%7Cxsmall</icon>
+        <labelPosition>right</labelPosition>
+        <text>Planejamento%20foi%20atualizado</text>
+      </controlProperties>
+    </control>
+    <control controlID="119" controlTypeID="com.balsamiq.mockups::IconLabel" x="588" y="303" w="-1" h="-1" measuredW="187" measuredH="21" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2101837</color>
+        <icon>CartIcon%7Cxsmall</icon>
+        <labelPosition>right</labelPosition>
+        <text>Valor%20do%20buffet%20foi%20atualizado</text>
+      </controlProperties>
+    </control>
+    <control controlID="120" controlTypeID="com.balsamiq.mockups::PieChart" x="625" y="403" w="138" h="118" measuredW="180" measuredH="180" zOrder="22" locked="false" isInGroup="-1"/>
+    <control controlID="121" controlTypeID="com.balsamiq.mockups::Label" x="729" y="410" w="-1" h="-1" measuredW="36" measuredH="21" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Buffet</text>
+      </controlProperties>
+    </control>
+    <control controlID="122" controlTypeID="com.balsamiq.mockups::Label" x="603" y="410" w="-1" h="-1" measuredW="61" measuredH="21" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Decora%E7%E3o</text>
+      </controlProperties>
+    </control>
+    <control controlID="123" controlTypeID="com.balsamiq.mockups::Label" x="588" y="536" w="-1" h="-1" measuredW="135" measuredH="21" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Previsto%3A%20R%2440.000%2C00</text>
+      </controlProperties>
+    </control>
+    <control controlID="124" controlTypeID="com.balsamiq.mockups::Label" x="588" y="556" w="-1" h="-1" measuredW="141" measuredH="21" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Realizado%3A%20R%2415.000%2C00</text>
+      </controlProperties>
+    </control>
+    <control controlID="125" controlTypeID="com.balsamiq.mockups::FieldSet" x="835" y="387" w="249" h="199" measuredW="200" measuredH="170" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Financeiro</text>
+      </controlProperties>
+    </control>
+    <control controlID="126" controlTypeID="com.balsamiq.mockups::Label" x="850" y="410" w="-1" h="-1" measuredW="172" measuredH="21" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Saldo%20Devedor%3A%20R%2425.000%2C00</text>
+      </controlProperties>
+    </control>
+    <control controlID="127" controlTypeID="com.balsamiq.mockups::Label" x="850" y="430" w="-1" h="-1" measuredW="180" measuredH="21" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Valor%20Acumulado%3A%20R%2415.000%2C00</text>
+      </controlProperties>
+    </control>
+    <control controlID="128" controlTypeID="com.balsamiq.mockups::Label" x="850" y="451" w="-1" h="-1" measuredW="162" measuredH="21" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Meses%20at%E9%20o%20casamento%3A%2010</text>
+      </controlProperties>
+    </control>
+    <control controlID="129" controlTypeID="com.balsamiq.mockups::Label" x="850" y="471" w="-1" h="-1" measuredW="175" measuredH="21" zOrder="31" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Economia%20Mensal%3A%20R%241500%2C00</text>
+      </controlProperties>
+    </control>
+    <control controlID="130" controlTypeID="com.balsamiq.mockups::Link" x="761" y="362" w="-1" h="-1" measuredW="59" measuredH="19" zOrder="32" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>ver%20mais...</text>
+        <underline>false</underline>
+      </controlProperties>
+    </control>
+    <control controlID="131" controlTypeID="com.balsamiq.mockups::Link" x="1023" y="360" w="-1" h="-1" measuredW="59" measuredH="19" zOrder="33" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>ver%20mais...</text>
+        <underline>false</underline>
+      </controlProperties>
+    </control>
+    <control controlID="132" controlTypeID="com.balsamiq.mockups::Link" x="1023" y="566" w="-1" h="-1" measuredW="59" measuredH="19" zOrder="34" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>ver%20mais...</text>
+        <underline>false</underline>
+      </controlProperties>
+    </control>
+    <control controlID="133" controlTypeID="com.balsamiq.mockups::Link" x="761" y="566" w="-1" h="-1" measuredW="59" measuredH="19" zOrder="35" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>ver%20mais...</text>
+        <underline>false</underline>
+      </controlProperties>
+    </control>
+    <control controlID="134" controlTypeID="com.balsamiq.mockups::Link" x="497" y="566" w="-1" h="-1" measuredW="59" measuredH="19" zOrder="36" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>ver%20mais...</text>
+        <underline>false</underline>
+      </controlProperties>
+    </control>
+    <control controlID="136" controlTypeID="com.balsamiq.mockups::Label" x="357" y="218" w="-1" h="-1" measuredW="153" measuredH="21" zOrder="37" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>13576743</color>
+        <text>Faltam%203%20meses%20e%2015%20dias.</text>
+      </controlProperties>
+    </control>
+    <control controlID="137" controlTypeID="com.balsamiq.mockups::Tooltip" x="723" y="139" w="189" h="83" measuredW="166" measuredH="123" zOrder="38" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>left</align>
+        <text>Fulano%20de%20Tal%0AN%FAmero%20de%20Pessoas%3A%204%0AAmigo%20em%20Comum%0AS%E3o%20Borja/RS</text>
+        <tooltipDirection>SW</tooltipDirection>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

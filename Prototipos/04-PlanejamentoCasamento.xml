@@ -1,0 +1,148 @@
+<mockup version="1.0" skin="wireframe" fontFace="Balsamiq Sans" measuredW="1096" measuredH="602" mockupW="800" mockupH="600">
+  <controls>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="296" y="2" w="800" h="600" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//</text>
+      </controlProperties>
+    </control>
+    <control controlID="37" controlTypeID="com.balsamiq.mockups::IconLabel" x="324" y="86" w="-1" h="-1" measuredW="99" measuredH="63" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>UsersIcon%7Clarge</icon>
+        <text>VouCasar.com.br</text>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::LinkBar" x="573" y="86" w="-1" h="-1" measuredW="390" measuredH="19" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>1</selectedIndex>
+        <text>Inicio%2C%20Planejamento%2C%20Convidados%2C%20Financeiro%2C%20Blog%2C%20Sair</text>
+      </controlProperties>
+    </control>
+    <control controlID="75" controlTypeID="com.balsamiq.mockups::FieldSet" x="881" y="149" w="200" h="413" measuredW="200" measuredH="170" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Total%20dos%20Gastos</text>
+      </controlProperties>
+    </control>
+    <control controlID="102" controlTypeID="com.balsamiq.mockups::Label" x="931" y="172" w="-1" h="-1" measuredW="134" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>545684</color>
+        <text>Previsto%3A%20R%2425.000%2C00</text>
+      </controlProperties>
+    </control>
+    <control controlID="103" controlTypeID="com.balsamiq.mockups::Label" x="924" y="199" w="-1" h="-1" measuredW="141" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>40463</color>
+        <text>Realizado%3A%20R%2415.000%2C00</text>
+      </controlProperties>
+    </control>
+    <control controlID="104" controlTypeID="com.balsamiq.mockups::Label" x="953" y="225" w="-1" h="-1" measuredW="112" measuredH="21" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Pago%3A%20R%2410.000%2C00</text>
+      </controlProperties>
+    </control>
+    <control controlID="105" controlTypeID="com.balsamiq.mockups::Label" x="907" y="252" w="-1" h="-1" measuredW="158" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>13576743</color>
+        <text>Saldo%20Devedor%3A%20R%241500%2C00</text>
+      </controlProperties>
+    </control>
+    <control controlID="115" controlTypeID="__group__" x="895" y="332" w="172" h="170" measuredW="172" measuredH="170" zOrder="8" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::PieChart" x="0" y="0" w="172" h="170" measuredW="180" measuredH="180" zOrder="0" locked="false" isInGroup="115"/>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="110" y="85" w="-1" h="-1" measuredW="36" measuredH="21" zOrder="1" locked="false" isInGroup="115">
+          <controlProperties>
+            <text>Buffet</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="17" y="64" w="-1" h="-1" measuredW="61" measuredH="21" zOrder="2" locked="false" isInGroup="115">
+          <controlProperties>
+            <text>Decora%E7%E3o</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="116" controlTypeID="com.balsamiq.mockups::Label" x="902" y="278" w="-1" h="-1" measuredW="163" measuredH="21" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Percentual%20Total%20Pago%3A%2060%25</text>
+      </controlProperties>
+    </control>
+    <control controlID="118" controlTypeID="com.balsamiq.mockups::SubTitle" x="355" y="171" w="-1" h="-1" measuredW="332" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>0</color>
+        <text>Planejamento%20do%20Casamento</text>
+      </controlProperties>
+    </control>
+    <control controlID="120" controlTypeID="com.balsamiq.mockups::Icon" x="331" y="170" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>ChartLineIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="121" controlTypeID="com.balsamiq.mockups::HRule" x="316" y="149" w="540" h="-1" measuredW="100" measuredH="10" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+      </controlProperties>
+    </control>
+    <control controlID="125" controlTypeID="__group__" x="309" y="220" w="555" h="138" measuredW="555" measuredH="138" zOrder="13" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::DataGrid" x="0" y="26" w="555" h="112" measuredW="436" measuredH="50" zOrder="0" locked="false" isInGroup="125">
+          <controlProperties>
+            <align>left</align>
+            <borderStyle>square</borderStyle>
+            <color>16777215</color>
+            <hasHeader>true</hasHeader>
+            <hLines>false</hLines>
+            <rowHeight>30</rowHeight>
+            <text>Item%2C%20Previsto%2C%20Realizado%2C%20%25%2C%20Pago%2C%20Saldo%20Devedor%0AIgreja%5Cr16/11/2013%2C%20R%24900.00%2CR%241000.00%2C%2010%25%2C%20R%24600.00%2CR%24400.00</text>
+            <verticalScrollbar>false</verticalScrollbar>
+            <vLines>true</vLines>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="24" y="5" w="-1" h="-1" measuredW="177" measuredH="22" zOrder="1" locked="false" isInGroup="125">
+          <controlProperties>
+            <bold>true</bold>
+            <color>2848996</color>
+            <size>14</size>
+            <text>Cerim%F4nia%20Civil%20e%20Religiosa</text>
+            <textOrientation>right</textOrientation>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Icon" x="0" y="0" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="2" locked="false" isInGroup="125">
+          <controlProperties>
+            <icon>HomeMobileIcon%7Csmall</icon>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="126" controlTypeID="__group__" x="309" y="373" w="555" h="138" measuredW="555" measuredH="138" zOrder="14" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::DataGrid" x="0" y="26" w="555" h="112" measuredW="457" measuredH="50" zOrder="0" locked="false" isInGroup="126">
+          <controlProperties>
+            <align>left</align>
+            <borderStyle>square</borderStyle>
+            <color>16777215</color>
+            <hasHeader>true</hasHeader>
+            <hLines>false</hLines>
+            <rowHeight>30</rowHeight>
+            <text>Item%2C%20Previsto%2C%20Realizado%2C%20%25%2C%20Pago%2C%20Saldo%20Devedor%0AFotos%5Cr16/10/2013%2C%20R%245000.00%2CR%244850.00%2C%2015%25%2C%20R%242000.00%2CR%242850.00</text>
+            <verticalScrollbar>false</verticalScrollbar>
+            <vLines>true</vLines>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="24" y="5" w="-1" h="-1" measuredW="86" measuredH="22" zOrder="1" locked="false" isInGroup="126">
+          <controlProperties>
+            <bold>true</bold>
+            <color>2848996</color>
+            <size>14</size>
+            <text>Foto%20e%20V%EDdeo</text>
+            <textOrientation>right</textOrientation>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Icon" x="0" y="0" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="2" locked="false" isInGroup="126">
+          <controlProperties>
+            <icon>CameraIcon%7Csmall</icon>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>

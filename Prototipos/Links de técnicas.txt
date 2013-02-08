@@ -1,0 +1,27 @@
+Técnicas Ajax
+demos.9lessons.info/jnotification/index.php
+demos.9lessons.info/googledrag/index.html
+
+Templates
+http://www.webappers.com/2009/07/05/create-a-web-app-admin-user-interface-in-photoshop/
+www.tiagopassos.com/admin_templates/template4_1280x1024-screenshot.png
+http://patterntap.com/
+http://patterntap.com/pattern/pricing-page-music-bed
+http://patterntap.com/pattern/etsy-bill-account-profile
+http://patterntap.com/pattern/dashboard-square
+http://www.toprated.com.br/5-sites-essenciais-para-designers
+http://www.toprated.com.br/category/design/page/2
+http://coding.smashingmagazine.com/2008/08/13/top-10-css-table-designs/
+
+Photoshop
+http://www.tutoriaisphotoshop.net/2011/12/criando-um-botao-web-com-layer-styles-e.html
+http://www.tutoriaisphotoshop.net/2011/04/criando-um-box-de-precos-para-sites.html
+http://www.tutoriaisphotoshop.net/2006/10/arquivo-de-tutoriais.html
+
+
+CodeIgniter
+http://codeigniterbrasil.com/categoria/passos-iniciais/
+
+Banco de Dados no CI
+http://ellislab.com/codeigniter/user-guide/database/active_record.html
+http://ellislab.com/codeigniter/user-guide/database/results.html
