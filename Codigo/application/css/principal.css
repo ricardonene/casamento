@@ -15,67 +15,63 @@
     width: 75%;
 }
 
-table, td {
-    border: solid 0px #FFF;
-    border-bottom: solid 0px #EFEFEF;
-}
-table {
+.tabelaItensPlanejados {
     border: solid 0px #EFEFEF;
     width: 80%;
     margin-bottom: 15px;
-}
-th {
-    border-top: solid 1px #CFCFCF;
-    border-bottom: solid 1px #CFCFCF;
-    font-size: 14px;
-    color: #AAA;
-    text-align: right;
-}
 
-td {
-    font-size: 14px;
-    text-align: right;
-    padding-top: 2px;
-}
+    th {
+        border-top: solid 1px #CFCFCF;
+        border-bottom: solid 1px #CFCFCF;
+        font-size: 14px;
+        color: #AAA;
+        text-align: right;
+    }
 
-.tituloItem {
-    text-align: left;
-    color: @corTitulo;
-    text-transform: uppercase;
-    font-size: 18px;
-    font-weight: bold;
-    width: 300px;
-}
-.descricaoItem {
-    color: #000;
-    padding-left: 5px;
-    font-size: 15px;
-    font-weight: bold;
-    text-align: left;
-    vertical-align: top;
-}
+    td {
+        font-size: 14px;
+        text-align: right;
+        padding-top: 2px;
+    }
 
-.fornecedorItem {
-    color: #999;
-    font-weight: normal;
-    text-transform: none;
-    font-size: 13px;
+    .tituloItem {
+        text-align: left;
+        color: @corTitulo;
+        text-transform: uppercase;
+        font-size: 18px;
+        font-weight: bold;
+        width: 300px;
+    }
+    .descricaoItem {
+        color: #000;
+        padding-left: 5px;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: left;
+        vertical-align: top;
+    }
+
+    .fornecedorItem {
+        color: #999;
+        font-weight: normal;
+        text-transform: none;
+        font-size: 13px;
+    }
+
+    .itemPlanejado {
+        border-bottom: solid 2px white;
+        background-color: #EFEFEF;
+        color: @corTitulo;
+        padding: 5px;
+        font-weight: bold;
+    }
+
+    .itemEspaco {
+        background-color: white;
+        font-size: 2px;
+    }
+
 }
-
-.itemPlanejado {
-    border-bottom: solid 2px white;
-    background-color: #EFEFEF;
-    color: @corTitulo;
-    padding: 5px;
-    font-weight: bold;
-}
-
-.itemEspaco {
-    background-color: white;
-    font-size: 2px;
-}
-
-
 
 
 /* INICIO Styles das listas dinamicas do Wizard Apartamento */
@@ -188,7 +184,7 @@ td {
 /* INICIO Styles dos formularios das listas dinamicas e dos cadastros */
 .divFomularioListasDinamicas {
     border: #ddd solid 1px;
-    display: none; 
+    display: block; 
     background-color: #EFEFEF;
     margin-bottom: 10px;
     padding: 5px;
@@ -370,4 +366,13 @@ td {
     width: 120px;
     height: 120px;
     background-image: url('http://thumbs.dreamstime.com/thumbimg_606/1305656289XldIoX.jpg');
+}
+
+/* CSS padrão para toda aplicação */
+.data {
+    width: 60px;
+}
+
+.dinheiro {
+    width: 100px;
 }

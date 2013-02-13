@@ -6,8 +6,10 @@
 
         <title><?php echo $titulo; ?></title>
 
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
         <link href="<?php echo base_url('application/css/principal.css') ?>" rel="stylesheet/less" media="screen" type="text/css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
         <script src="<?php echo base_url('application/js/less-1.3.3.min.js') ?>"></script>
     </head>
     <body>
@@ -19,7 +21,7 @@
                 <div id="navigation">
                     <ul>
                         <li><a href="<?php echo base_url() ?>">Início</a></li>
-                        <li><a href="<?php echo base_url('planejamento/teste') ?>">Planejamento</a></li>
+                        <li><a href="<?php echo base_url('planejamento') ?>">Planejamento</a></li>
                         <li><a href="convidados">Convidados</a></li>
                         <li><a href="financeiro">Financeiro</a></li>
                         <li><a href="#">Blog</a></li>

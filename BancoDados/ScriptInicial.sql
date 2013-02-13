@@ -25,7 +25,8 @@ DROP TABLE IF EXISTS `DBCasamento`.`Item` ;
 
 CREATE  TABLE IF NOT EXISTS `DBCasamento`.`Item` (
   `idItem` INT NOT NULL AUTO_INCREMENT ,
-  `Descricao` VARCHAR(100) NULL ,
+  `Descricao` VARCHAR(100) NOT NULL ,
+  `MesesAntes` TINYINT NOT NULL DEFAULT 1 COMMENT 'Tempo (meses) antes do casamento que o item deve ser executado/agendado' ,
   `FK_idCategoria` INT NOT NULL ,
   PRIMARY KEY (`idItem`, `FK_idCategoria`) ,
   INDEX `fk_Item_Categoria_idx` (`FK_idCategoria` ASC) ,
@@ -54,6 +55,19 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `DBCasamento`.`Cidade`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `DBCasamento`.`Cidade` ;
+
+CREATE  TABLE IF NOT EXISTS `DBCasamento`.`Cidade` (
+  `idCidade` INT NOT NULL ,
+  `Nome` VARCHAR(100) NULL ,
+  `UF` VARCHAR(2) NULL ,
+  PRIMARY KEY (`idCidade`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `DBCasamento`.`Casamento`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `DBCasamento`.`Casamento` ;
@@ -64,10 +78,12 @@ CREATE  TABLE IF NOT EXISTS `DBCasamento`.`Casamento` (
   `Noivo` INT NULL ,
   `Cerimonial` INT NULL ,
   `DataCasamento` DATE NULL ,
+  `FK_idCidade` INT NOT NULL ,
   PRIMARY KEY (`idCasamento`) ,
   INDEX `fkNoivaUsuario_idx` (`Noiva` ASC) ,
   INDEX `fkNoivoUsuario_idx` (`Noivo` ASC) ,
   INDEX `fkCerimonialUsuario_idx` (`Cerimonial` ASC) ,
+  INDEX `fk_Casamento_Cidade1_idx` (`FK_idCidade` ASC) ,
   CONSTRAINT `fkNoivaUsuario`
     FOREIGN KEY (`Noiva` )
     REFERENCES `DBCasamento`.`Usuario` (`idUsuario` )
@@ -82,6 +98,11 @@ CREATE  TABLE IF NOT EXISTS `DBCasamento`.`Casamento` (
     FOREIGN KEY (`Cerimonial` )
     REFERENCES `DBCasamento`.`Usuario` (`idUsuario` )
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Casamento_Cidade1`
+    FOREIGN KEY (`FK_idCidade` )
+    REFERENCES `DBCasamento`.`Cidade` (`idCidade` )
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -94,7 +115,7 @@ DROP TABLE IF EXISTS `DBCasamento`.`Planejamento` ;
 CREATE  TABLE IF NOT EXISTS `DBCasamento`.`Planejamento` (
   `idPlanejamento` INT NOT NULL AUTO_INCREMENT ,
   `TotalPrevisto` DOUBLE NULL ,
-  `TotalRealizado` DOUBLE NULL ,
+  `TotalContratado` DOUBLE NULL ,
   `TotalPago` DOUBLE NULL ,
   `SaldoDevedor` DOUBLE NULL ,
   `Percentual` DOUBLE NULL ,
@@ -121,9 +142,16 @@ CREATE  TABLE IF NOT EXISTS `DBCasamento`.`Fornecedor` (
   `Celular` VARCHAR(15) NULL ,
   `Responsável` VARCHAR(100) NULL ,
   `Endereco` VARCHAR(100) NULL ,
+  `FK_idCidade` INT NOT NULL ,
   `Site` VARCHAR(150) NULL ,
   `EMail` VARCHAR(150) NULL ,
-  PRIMARY KEY (`idFornecedores`) )
+  PRIMARY KEY (`idFornecedores`) ,
+  INDEX `fk_Fornecedor_Cidade1_idx` (`FK_idCidade` ASC) ,
+  CONSTRAINT `fk_Fornecedor_Cidade1`
+    FOREIGN KEY (`FK_idCidade` )
+    REFERENCES `DBCasamento`.`Cidade` (`idCidade` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -136,7 +164,7 @@ CREATE  TABLE IF NOT EXISTS `DBCasamento`.`ItemPlanejamento` (
   `FK_idItem` INT NOT NULL ,
   `FK_idPlanejamento` INT NOT NULL ,
   `ValorPrevisto` DOUBLE NULL ,
-  `ValorRealizado` DOUBLE NULL ,
+  `ValorContratado` DOUBLE NULL ,
   `ValorPago` DOUBLE NULL ,
   `Percentual` DOUBLE NULL ,
   `SaldoDevedor` DOUBLE NULL ,
@@ -190,19 +218,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `DBCasamento`.`Cidade`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `DBCasamento`.`Cidade` ;
-
-CREATE  TABLE IF NOT EXISTS `DBCasamento`.`Cidade` (
-  `idCidade` INT NOT NULL ,
-  `Nome` VARCHAR(100) NULL ,
-  `UF` VARCHAR(2) NULL ,
-  PRIMARY KEY (`idCidade`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `DBCasamento`.`Convidado`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `DBCasamento`.`Convidado` ;
@@ -214,20 +229,20 @@ CREATE  TABLE IF NOT EXISTS `DBCasamento`.`Convidado` (
   `Celular` VARCHAR(15) NULL ,
   `EMail` VARCHAR(150) NULL ,
   `Endereco` VARCHAR(150) NULL ,
-  `Cidade` INT NULL ,
+  `FK_Cidade` INT NULL ,
   `Bairro` VARCHAR(100) NULL ,
   `CEP` VARCHAR(9) NULL ,
   `FK_idConvite` INT NOT NULL ,
   PRIMARY KEY (`idConvidado`, `FK_idConvite`) ,
   INDEX `fk_Convidado_Convite1_idx` (`FK_idConvite` ASC) ,
-  INDEX `fkConvidadeCidade_idx` (`Cidade` ASC) ,
+  INDEX `fkConvidadeCidade_idx` (`FK_Cidade` ASC) ,
   CONSTRAINT `fk_Convidado_Convite1`
     FOREIGN KEY (`FK_idConvite` )
     REFERENCES `DBCasamento`.`Convite` (`idConvite` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fkConvidadeCidade`
-    FOREIGN KEY (`Cidade` )
+    FOREIGN KEY (`FK_Cidade` )
     REFERENCES `DBCasamento`.`Cidade` (`idCidade` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -242,7 +257,7 @@ DROP TABLE IF EXISTS `DBCasamento`.`Pagamento` ;
 CREATE  TABLE IF NOT EXISTS `DBCasamento`.`Pagamento` (
   `idPagamento` INT NOT NULL AUTO_INCREMENT ,
   `Data` DATE NULL ,
-  `Valor` TINYINT(1) NULL ,
+  `Valor` DOUBLE NULL DEFAULT 0 ,
   `FK_idItem` INT NOT NULL ,
   `FK_idPlanejamento` INT NOT NULL ,
   PRIMARY KEY (`idPagamento`, `FK_idItem`, `FK_idPlanejamento`) ,
@@ -250,6 +265,30 @@ CREATE  TABLE IF NOT EXISTS `DBCasamento`.`Pagamento` (
   CONSTRAINT `fk_Pagamento_ItemPlanejamento1`
     FOREIGN KEY (`FK_idItem` , `FK_idPlanejamento` )
     REFERENCES `DBCasamento`.`ItemPlanejamento` (`FK_idItem` , `FK_idPlanejamento` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `DBCasamento`.`CategoriaFornecedor`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `DBCasamento`.`CategoriaFornecedor` ;
+
+CREATE  TABLE IF NOT EXISTS `DBCasamento`.`CategoriaFornecedor` (
+  `FK_idFornecedores` INT NOT NULL ,
+  `FK_idCategoria` INT NOT NULL ,
+  PRIMARY KEY (`FK_idFornecedores`, `FK_idCategoria`) ,
+  INDEX `fk_Fornecedor_has_Categoria_Categoria1_idx` (`FK_idCategoria` ASC) ,
+  INDEX `fk_Fornecedor_has_Categoria_Fornecedor1_idx` (`FK_idFornecedores` ASC) ,
+  CONSTRAINT `fk_Fornecedor_has_Categoria_Fornecedor1`
+    FOREIGN KEY (`FK_idFornecedores` )
+    REFERENCES `DBCasamento`.`Fornecedor` (`idFornecedores` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Fornecedor_has_Categoria_Categoria1`
+    FOREIGN KEY (`FK_idCategoria` )
+    REFERENCES `DBCasamento`.`Categoria` (`idCategoria` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

@@ -16,14 +16,6 @@ class Planejamento extends CI_Controller {
         $dados['categorias'] = $this->Categoria->listarTodos();
         $this->template->load('templates/templatePadrao', 'planejamentoView', $dados);
     }
-    
-    public function teste() {
-        $dados['titulo'] = 'Planejamento';
-
-        $this->load->model('Categoria');
-        $dados['categorias'] = $this->Categoria->listarTodos();
-        $this->template->load('templates/templatePadrao', 'planejamentoTeste', $dados);
-    }
 
     public function listarItems($idCategoria = false) {
 

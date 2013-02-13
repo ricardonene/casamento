@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/Casamento/Codigo/';
+$config['base_url']	= 'http://localhost/casamento/Codigo/';
 
 /*
 |--------------------------------------------------------------------------
