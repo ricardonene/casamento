@@ -6,11 +6,16 @@
 
         <title><?php echo $titulo; ?></title>
 
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+        <link rel="stylesheet" href="<?php echo base_url('application/css/jquery-ui-1.10.0.custom.css') ?>" />
         <link href="<?php echo base_url('application/css/principal.css') ?>" rel="stylesheet/less" media="screen" type="text/css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+        <script src="<?php echo base_url('application/js/jquery-ui-1.10.0.custom.js') ?>"></script>
         <script src="<?php echo base_url('application/js/less-1.3.3.min.js') ?>"></script>
+        <script src="<?php echo base_url('application/js/jquery.maskMoney.js') ?>"></script>
+        <script src="<?php echo base_url('application/js/jquery.maskedinput.js') ?>"></script>
+        <script src="<?php echo base_url('application/js/accounting.js') ?>"></script>
+        <script src="<?php echo base_url('application/js/jquery.validate.js') ?>"></script>
+        <script src="<?php echo base_url('application/js/script.js') ?>"></script>       
     </head>
     <body>
         <div id="container">

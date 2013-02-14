@@ -1,4 +1,5 @@
 @corTitulo: #008F8B;
+@tamanhoListaItem: 80%;
 
 #totalGastos {
 
@@ -17,7 +18,7 @@
 
 .tabelaItensPlanejados {
     border: solid 0px #EFEFEF;
-    width: 80%;
+    width: @tamanhoListaItem;
     margin-bottom: 15px;
 
     th {
@@ -74,113 +75,6 @@
 }
 
 
-/* INICIO Styles das listas dinamicas do Wizard Apartamento */
-.lista {
-    margin: 0px;
-}
-
-.lista .item {
-    background-color: #EEEEEE; 
-
-    padding: 2px;
-    border: #ddd solid 1px;
-    margin-bottom: 1px;
-}
-
-.lista .itemUnico {
-    float: left;
-    min-width: 115px;
-    background-color: #EEEEEE; 
-    height: 15px;
-    padding: 3px;
-    border: #ddd solid 1px;
-    margin-bottom: 5px;
-    margin-right: 10px
-}
-
-.lista .imagem {
-    float: left; 
-    margin-right: 10px;
-}
-
-.lista .fechar{
-    float: right;
-    margin-top: 2px;
-    margin-right: 5px;
-}
-
-.lista .linhaPrincipal {
-    float: left;
-    border: solid 0px red; 
-    color: #003856; 
-    font-weight: bold; 
-    font-size: 12pt;
-}
-
-.lista  .linhaSecundaria{
-    float: left; 
-    color: #666666; 
-    font-size: 9pt;
-    border: solid 0px red; 
-}
-
-.lista .colunaDescricao {
-    float: left;
-    width: 30%;
-}
-
-.lista .colunaValores {
-    float: left;
-    border: solid red 0px;
-    margin-left: 2px;
-    width: 12%;
-}
-
-.lista .fieldSetValores {
-    font-size: 90%; margin:0px; padding: 0px; text-align: center; 
-}
-
-.lista .legendValores {
-    font-size: 70%;
-    font-weight: bold;
-}
-
-.valorPrevisto {
-    color: #000099;
-    border: solid #000099 1px;
-    font-weight: bold;
-}
-
-.valorRealizado {
-    color: #990000;
-    border: solid #990000 1px;
-    font-weight: bold;
-}
-
-.valorPago {
-    color: #009900;
-    border: solid #009900 1px;
-    font-weight: bold;
-}
-
-.valorPercentual {
-    color: #000;
-    border: solid #000 1px;
-    font-weight: bold;
-}
-
-.valorSaldoDevedor {
-    color: #FF0000;
-    border: solid #FF0000 1px;
-    font-weight: bold;
-}
-
-
-
-
-
-/* FIM Styles das listas do Wizard Apartamento */
-
 /* INICIO Styles dos formularios das listas dinamicas e dos cadastros */
 .divFomularioListasDinamicas {
     border: #ddd solid 1px;
@@ -188,6 +82,7 @@
     background-color: #EFEFEF;
     margin-bottom: 10px;
     padding: 5px;
+    width: @tamanhoListaItem;
 }
 
 .divFomularioListasDinamicas td {
@@ -277,7 +172,8 @@
 
 * 
 {
-    font-family: Trebuchet, Helvetica, Arial, Geneva, sans-serif;
+    font-family: Trebuchet MS, Tahoma, Arial, Geneva, sans-serif;
+    font-size: 13px;
 }
 
 #container
@@ -365,14 +261,14 @@
     border: solid red 0px;
     width: 120px;
     height: 120px;
-    background-image: url('http://thumbs.dreamstime.com/thumbimg_606/1305656289XldIoX.jpg');
+    /*background-image: url('http://thumbs.dreamstime.com/thumbimg_606/1305656289XldIoX.jpg');*/
 }
 
 /* CSS padrão para toda aplicação */
 .data {
-    width: 60px;
+    width: 80px;
 }
 
 .dinheiro {
-    width: 100px;
+    width: 90px;
 }

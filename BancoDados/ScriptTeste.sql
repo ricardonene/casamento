@@ -13,11 +13,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Banco de Dados: `DBCasamento`
 --
 
---
--- Extraindo dados da tabela `Casamento`
---
 
-INSERT INTO `Casamento` VALUES(2, 2, 1, NULL, '2014-01-25', 4500);
 
 --
 -- Extraindo dados da tabela `Categoria`
@@ -25,13 +21,6 @@ INSERT INTO `Casamento` VALUES(2, 2, 1, NULL, '2014-01-25', 4500);
 
 INSERT INTO `Categoria` VALUES(1, 'Fotos e Videos');
 INSERT INTO `Categoria` VALUES(2, 'Cerimônia Civil e Religiosa');
-
---
--- Extraindo dados da tabela `CategoriaFornecedor`
---
-
-INSERT INTO `CategoriaFornecedor` VALUES(2, 1);
-INSERT INTO `CategoriaFornecedor` VALUES(4, 2);
 
 --
 -- Extraindo dados da tabela `Cidade`
@@ -5602,19 +5591,7 @@ INSERT INTO `Cidade` VALUES(5562, 'Tupiratins', 'TO');
 INSERT INTO `Cidade` VALUES(5563, 'Wanderlândia', 'TO');
 INSERT INTO `Cidade` VALUES(5564, 'Xambioá', 'TO');
 
---
--- Extraindo dados da tabela `Convidado`
---
 
-
---
--- Extraindo dados da tabela `Convite`
---
-
-
---
--- Extraindo dados da tabela `Fornecedor`
---
 
 INSERT INTO `Fornecedor` VALUES(2, 'Bruno Messina', NULL, '(48) 9981-3102', 'Bruno Messina', NULL, 4500, 'www.brunomessina.com.br', 'contato@brunomessina.com.br');
 INSERT INTO `Fornecedor` VALUES(4, 'Igreja Santa Catarina de Alexandria', NULL, NULL, 'Pe. Fulano', NULL, 4500, NULL, NULL);
@@ -5630,6 +5607,25 @@ INSERT INTO `Item` VALUES(9, 'Poster dos Noivos', 1, 1);
 INSERT INTO `Item` VALUES(10, 'Igreja', 12, 2);
 INSERT INTO `Item` VALUES(13, 'Salão', 12, 2);
 INSERT INTO `Item` VALUES(14, 'Cerimonialista', 12, 2);
+
+--
+-- Extraindo dados da tabela `Usuario`
+--
+
+INSERT INTO `Usuario` VALUES(1, 'ricardonene@gmail.com', '12345678', 'Ricardo Martins Nenê', '1', 0);
+INSERT INTO `Usuario` VALUES(2, 'gcpoerscke@gmail.com', NULL, 'Greice Cunha Poerscke', '1', 0);
+
+--
+-- Extraindo dados da tabela `Casamento`
+--
+
+INSERT INTO `Casamento` VALUES(2, 2, 1, NULL, '2014-01-25', 4500);
+
+--
+-- Extraindo dados da tabela `Planejamento`
+--
+
+INSERT INTO `Planejamento` VALUES(1, 0, 0, 0, 0, 0, 2);
 
 --
 -- Extraindo dados da tabela `ItemPlanejamento`
@@ -5649,14 +5645,8 @@ INSERT INTO `Pagamento` VALUES(3, '2012-01-28', 500, 10, 1);
 INSERT INTO `Pagamento` VALUES(4, '2012-02-28', 500, 10, 1);
 
 --
--- Extraindo dados da tabela `Planejamento`
+-- Extraindo dados da tabela `CategoriaFornecedor`
 --
 
-INSERT INTO `Planejamento` VALUES(1, 0, 0, 0, 0, 0, 2);
-
---
--- Extraindo dados da tabela `Usuario`
---
-
-INSERT INTO `Usuario` VALUES(1, 'ricardonene@gmail.com', '12345678', 'Ricardo Martins Nenê', '1', 0);
-INSERT INTO `Usuario` VALUES(2, 'gcpoerscke@gmail.com', NULL, 'Greice Cunha Poerscke', '1', 0);
+INSERT INTO `CategoriaFornecedor` VALUES(2, 1);
+INSERT INTO `CategoriaFornecedor` VALUES(4, 2);
