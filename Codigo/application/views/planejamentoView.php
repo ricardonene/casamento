@@ -41,12 +41,34 @@
             clone.appendTo("#divParcelas");   
         }
     }
+    function addItemListaDinamica(controller, formulario, lista, divFormulario) {
+        
+        //if ($(formulario).validate().form()) {
+        //$(formulario+" > .flash").show();
+        //$(formulario+" > .flash").fadeIn(400).html('<img src="../imagens/loader.gif" align="absmiddle"> <span class="loading">Incluindo...</span>');
+        $.post("planejamento/salvar",
+        $(formulario).serialize(),
+        function (html) {
+            //                    $(lista).append(html);
+            //                    $(lista+":first").slideDown(300);
+            //                    $(formulario+" > .flash").hide();
+            //                    $(divFormulario).slideToggle('slow');
+            $("#msg").html(html);
+            $(formulario +" :input[type=text]").each(function(index) {
+                //$(this).val("");
+            });
+        });
+        //}
+        return false;
+
+    }
     $(document).ready(function(){
         $("#parcelaEntrada").change(function (){
             calcularParcelas($("#nroPrestacoes").val());
         });
         
         $(".data").datepicker();
+        
         $( "#nroPrestacoes" ).spinner(
         { min: 1 },
         {
@@ -55,107 +77,113 @@
             }
         }
     );
+        
         $('#categorias').change(function(){
             $('#items').load('planejamento/listarItems/'+$('#categorias').val());
+            $('#fornecedores').load('planejamento/listarFornecedores/'+$('#categorias').val());
         });
     });
 </script>
+<div id="msg"></div>
 <div id="divAddItem" class="divFomularioListasDinamicas" style="width: 500px;">
-    <table width="100%" border="0">
-        <tr>
-            <td colspan="2"  class="labelCabecalho">
-                Adicionar Item
-            </td>
-        </tr>
-        <tr>
-            <td class="label"> Categoria*: </td>
-            <td>
-                <?php
-                $options = array('' => 'Selecione a Categoria');
-                foreach ($categorias as $categoria)
-                    $options[$categoria['idCategoria']] = $categoria['Descricao'];
-                echo form_dropdown('categorias', $options, '', 'id="categorias"');
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td class="label"> Item*: </td>
-            <td> 
-                <?php
-                $options = array('' => 'Selecione a Categoria');
-                echo form_dropdown('items', $options, '', 'id="items"');
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td class="label"> Data Execução*: </td>
-            <td> 
-                <input class="inputText data" type="text" name="DataExecucao" id="DataExecucao" value=""> 
+    <form id="formAddItem">
+        <table width="100%" border="0">
+            <tr>
+                <td colspan="2"  class="labelCabecalho">
+                    Adicionar Item
+                </td>
+            </tr>
+            <tr>
+                <td class="label"> Categoria*: </td>
+                <td>
+                    <?php
+                    $options = array('' => 'Selecione a Categoria');
+                    foreach ($categorias as $categoria)
+                        $options[$categoria['idCategoria']] = $categoria['Descricao'];
+                    echo form_dropdown('categorias', $options, '', 'id="categorias"');
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="label"> Item*: </td>
+                <td> 
+                    <?php
+                    $options = array('' => 'Selecione a Categoria');
+                    echo form_dropdown('items', $options, '', 'id="items"');
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="label"> Data Execução*: </td>
+                <td> 
+                    <input class="inputText data" type="text" name="DataExecucao" id="DataExecucao" value=""> 
 
-            </td>
-        </tr>
-        <tr>
-            <td class="label"> Previsto*: </td>
-            <td> 
-                <input class="inputText dinheiro" type="text" name="ValorPrevisto" id="ValorPrevisto" value=""> 
+                </td>
+            </tr>
+            <tr>
+                <td class="label"> Previsto*: </td>
+                <td> 
+                    <input class="inputText dinheiro" type="text" name="ValorPrevisto" id="ValorPrevisto" value=""> 
 
-            </td>
-        </tr>
-        <tr>
-            <td class="label"> Contratado: </td>
-            <td> 
-                <input class="inputText dinheiro" type="text" name="ValorContratado" id="ValorContratado" value="5000"> 
+                </td>
+            </tr>
+            <tr>
+                <td class="label"> Contratado: </td>
+                <td> 
+                    <input class="inputText dinheiro" type="text" name="ValorContratado" id="ValorContratado" value="5000"> 
 
-            </td>
-        </tr>
-        <tr>
-            <td class="label"> Pago: </td>
-            <td> 
-                <input class="inputText dinheiro" type="text" name="ValorPago" id="ValorPago" value=""> 
+                </td>
+            </tr>
+            <tr>
+                <td class="label"> Pago: </td>
+                <td> 
+                    <input class="inputText dinheiro" type="text" name="ValorPago" id="ValorPago" value=""> 
 
-            </td>
-        </tr>
-        <tr>
-            <td class="label"> Fornecedor: </td>
-            <td> 
-                <select>
-                    <option>Selecionar Fornecedor</option>
-                </select>
-                <input type="button" value="Novo Fornecedor">
+                </td>
+            </tr>
+            <tr>
+                <td class="label"> Fornecedor: </td>
+                <td> 
+                   <?php
+                    $options = array('' => 'Selecione a Categoria');
+                    echo form_dropdown('fornecedores', $options, '', 'id="fornecedores"');
+                    ?>
+                    <input type="button" value="Novo Fornecedor">
 
-            </td>
-        </tr>
-        <tr>
-            <td class="label"> Forma de Pagamento: </td>
-            <td> 
-                <input type="radio" name="FormaPagamento" id="rbtnVista" value="V" checked="checked" onclick="$('#divPrestacoes').hide();"> <label for="rbtnVista">À Vista</label>
-                <input type="radio" name="FormaPagamento" id="rbtnPrazo" value="P" onclick="listarParcelas();"> <label for="rbtnPrazo">A Prazo</label>
-                <div id="divPrestacoes" style="display: none;">
-                    <label for="parcelaEntrada">Entrada:</label>
-                    <input id="parcelaEntrada" name="parcelaEntrada" value="1000" class="dinheiro" />
-                    Data: <input type="text" id="dataEntrada" name="dataEntrada" class="data" />
-                    <p>
-                        <label for="nroPrestacoes">Nº de Prestações:</label>
-                        <input id="nroPrestacoes" name="nroPrestacoes" value="1" size="5" />
-                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class="label"> Forma de Pagamento: </td>
+                <td> 
+                    <input type="radio" name="FormaPagamento" id="rbtnVista" value="V" checked="checked" onclick="$('#divPrestacoes').hide();"> <label for="rbtnVista">À Vista</label>
+                    <input type="radio" name="FormaPagamento" id="rbtnPrazo" value="P" onclick="listarParcelas();"> <label for="rbtnPrazo">A Prazo</label>
+                    <div id="divPrestacoes" style="display: none;">
+                        <label for="parcelaEntrada">Entrada:</label>
+                        <input id="parcelaEntrada" name="parcelaEntrada" value="1000" class="dinheiro" />
+                        Data: <input type="text" id="dataEntrada" name="dataEntrada" class="data" />
+                        <p>
+                            <label for="nroPrestacoes">Nº de Prestações:</label>
+                            <input id="nroPrestacoes" name="nroPrestacoes" value="1" size="5" />
+                        </p>
 
-                    <div id="divParcela1">
-                        <label for="parcela1">1ª Parcela:</label>
-                        <input id="parcela1" name="parcela1" value="0" class="dinheiro" />
-                        Data: <input type="text" id="dataParcela1" name="dataParcela1" class="data" />
+                        <div id="divParcela1">
+                            <label for="parcela1">1ª Parcela:</label>
+                            <input id="parcela1" name="parcelas[]" value="0" class="dinheiro" />
+                            Data: <input type="text" id="dataParcela1" name="dataParcelas[]" class="data" />
+                        </div>
+                        <div id="divParcelas"></div>
                     </div>
-                    <div id="divParcelas"></div>
-                </div>
 
-            </td>
-        </tr>       
-        <tr>
-            <td colspan="2" class="labelRodape">
-                <input type="button" id="addVeiculo" value="Adicionar" class="botaoPrincipal" onclick="addItemListaDinamica('veiculoController.php', '#formVeiculos', '#listaVeiculos', '#divFormVeiculo')">
-                <input type="button" id="cancelarVeiculo" value="Cancelar" class="botaoSecundario" onclick="btnCancelar('#divFormVeiculo', '#formVeiculos')">
-            </td>
-        </tr>
-    </table>
+                </td>
+            </tr>       
+            <tr>
+                <td colspan="2" class="labelRodape">
+                    <input type="button" id="addVeiculo" value="Adicionar" class="botaoPrincipal" onclick="addItemListaDinamica('veiculoController.php', '#formAddItem', '#listaVeiculos', '#divFormVeiculo')">
+                    <input type="button" id="cancelarVeiculo" value="Cancelar" class="botaoSecundario" onclick="btnCancelar('#divFormVeiculo', '#formVeiculos')">
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
 
 <center>
@@ -179,10 +207,14 @@
         </fieldset>
     </div>
     <br />
-    <?php for ($j = 0; $j < 2; $j++) { ?>
+
+    <?php
+    // var_dump($categorias);
+    foreach ($categorias as $categoria) {
+        ?>
         <table cellspacing="0" class="tabelaItensPlanejados">
             <tr>
-                <th class="tituloItem"> Fotos e Filmagem </th>
+                <th class="tituloItem"> <?php echo $categoria['Descricao']; ?> </th>
                 <th> Previsto </th>
                 <th> Contratado </th>
                 <th> Pago </th>
