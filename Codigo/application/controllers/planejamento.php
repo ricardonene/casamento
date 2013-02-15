@@ -10,13 +10,13 @@ class Planejamento extends CI_Controller {
     }
 
     public function index() {
-        $dadosSessao = array (
+        $dadosSessao = array(
             'idPlanejamento' => 1
         );
         $this->session->set_userdata($dadosSessao);
-        
+
         $dados['titulo'] = 'Planejamento';
-        
+
         $this->load->model('Categoria');
         $dados['categorias'] = $this->Categoria->listarTodos();
 
@@ -28,7 +28,7 @@ class Planejamento extends CI_Controller {
 
     public function listarItems($idCategoria = false) {
 
-        $options[] = 'Selecione o Item';
+        $options[''] = 'Selecione o Item';
         echo 'idCategoria: ' . $idCategoria;
         if ($idCategoria != false) {
             $this->load->model('Categoria');
@@ -45,7 +45,7 @@ class Planejamento extends CI_Controller {
 
     public function listarFornecedores($idCategoria = false) {
 
-        $options[] = 'Selecione o Fornecedor';
+        $options[''] = 'Selecione o Fornecedor';
         echo 'idCategoria: ' . $idCategoria;
         if ($idCategoria != false) {
             $this->load->model('Fornecedor');
@@ -61,53 +61,53 @@ class Planejamento extends CI_Controller {
     }
 
     public function salvar() {
-        //var_dump($_POST);
+        $sucesso = FALSE;
+        if ($_POST) {
+            $dados["FK_idPlanejamento"] = $this->session->userdata('idPlanejamento');
+            $dados["FK_idItem"] = $this->input->post('items');
+            $dados["DataExecucao"] = dataMYSQL($this->input->post('DataExecucao'));
+            $dados["ValorPrevisto"] = $this->input->post('ValorPrevisto');
+            $dados["ValorContratado"] = $this->input->post('ValorContratado');
+            $dados["ValorPago"] = $this->input->post('ValorPago');
+            //$dados["Percentual"] = Realizado / Total Realizado
+            $dados["SaldoDevedor"] = $dados["ValorContratado"] - $dados["ValorPago"];
+            $dados["FK_idFornecedor"] = $this->input->post('fornecedores');
+            $dados["FormaPagamento"] = $this->input->post('FormaPagamento');
 
-        $dados["FK_idPlanejamento"] = $this->session->userdata('idPlanejamento');
-        $dados["FK_idItem"] = $this->input->post('items');
-        $dados["DataExecucao"] = $this->input->post('DataExecucao');
-        $dados["ValorPrevisto"] = $this->input->post('ValorPrevisto');
-        $dados["ValorContratado"] = $this->input->post('ValorContratado');
-        $dados["ValorPago"] = $this->input->post('ValorPago');
-        //$dados["Percentual"] = Realizado / Total Realizado
-        $dados["SaldoDevedor"] = $dados["ValorContratado"] - $dados["ValorPago"];
-        $dados["FK_idFornecedor"] = $this->input->post('fornecedores');
-        $dados["FormaPagamento"] = $this->input->post('FormaPagamento');
+            $this->load->model('ItemPlanejamento');
+            $resultado = $this->ItemPlanejamento->inserir($dados);
+            if ($resultado == 0) {
+                $sucesso = TRUE;
+            } else {
+                $msg = '<br>Erro: '.$resultado;
+            }
 
-        $this->load->model('ItemPlanejamento');
-        $r = $this->ItemPlanejamento->inserir($dados);
+            if ($dados["FormaPagamento"] == "P") {
+                $this->load->model('Pagamento');
 
-        if ($dados["FormaPagamento"] == "P") {
-            $this->load->model('Pagamento');
-
-            $dadosPgto["Valor"] = $this->input->post('parcelaEntrada');
-            $dadosPgto["Data"] = $this->input->post('dataEntrada');
-            $dadosPgto["FK_idPlanejamento"] = $dados["FK_idPlanejamento"];
-            $dadosPgto["FK_idItem"] = $dados["FK_idItem"];
-
-            $r = $this->Pagamento->inserir($dadosPgto);
-
-            $nroPrestacoes = $this->input->post('nroPrestacoes');
-            $parcelas = $this->input->post('parcelas');
-            $dataparcelas = $this->input->post('dataParcelas');
-            for ($i = 0; $i < $nroPrestacoes; $i++) {
-                $dadosPgto = NULL;
-                $dadosPgto["Valor"] = $parcelas[$i];
-                $dadosPgto["Data"] = $dataparcelas[$i];
+                $dadosPgto["Valor"] = $this->input->post('parcelaEntrada');
+                $dadosPgto["Data"] = dataMYSQL($this->input->post('dataEntrada'));
                 $dadosPgto["FK_idPlanejamento"] = $dados["FK_idPlanejamento"];
                 $dadosPgto["FK_idItem"] = $dados["FK_idItem"];
-                $r = $this->Pagamento->inserir($dadosPgto);
+                $resultado = $this->Pagamento->inserir($dadosPgto);
+
+                $nroPrestacoes = $this->input->post('nroPrestacoes');
+                $parcelas = $this->input->post('parcelas');
+                $dataparcelas = $this->input->post('dataParcelas');
+                for ($i = 0; $i < $nroPrestacoes; $i++) {
+                    $dadosPgto = NULL;
+                    $dadosPgto["Valor"] = $parcelas[$i];
+                    $dadosPgto["Data"] = dataMYSQL($dataparcelas[$i]);
+                    $dadosPgto["FK_idPlanejamento"] = $dados["FK_idPlanejamento"];
+                    $dadosPgto["FK_idItem"] = $dados["FK_idItem"];
+                    $resultado = $this->Pagamento->inserir($dadosPgto);
+                }
             }
-//            ["parcelas"]=> array(4) { 
-//                [0]=> string(4) "1000" 
-//                [1]=> string(4) "1000" 
-//                [2]=> string(4) "1000" 
-//                [3]=> string(4) "1000" } 
-//            ["dataParcelas"]=> array(4) { 
-//                [0]=> string(10) "02/28/2013" 
-//                [1]=> string(10) "03/28/2013" 
-//                [2]=> string(10) "04/28/2013" 
-//                [3]=> string(10) "05/28/2013" } 
+        }
+        if ($sucesso) {
+            echo "Item salvo com sucesso.";
+        } else {
+            echo "Erro ao salvar item.".$msg;
         }
     }
 

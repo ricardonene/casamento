@@ -7,6 +7,11 @@ class Pagamento extends CI_Model {
     }
     
     function inserir($dados) {
-        $insert = $this->db->insert('Pagamento',$dados);
+        $this->db->insert('Pagamento',$dados);
+        if($this->db->_error_number() == 0) {
+            return 0;
+        } else {
+            return $this->db->_error_number() . ' - ' .$this->db->_error_message();
+        }
     }
 }

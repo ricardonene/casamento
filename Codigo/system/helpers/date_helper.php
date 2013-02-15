@@ -28,6 +28,46 @@
 // ------------------------------------------------------------------------
 
 /**
+ * Formata a Data no Formato do MySQL
+ *
+ * Retorna no formato AAAA-MM-DD
+ *
+ * @access	public
+ * @param	string
+ * @return	string
+ */
+if ( ! function_exists('dataMYSQL'))
+{
+	function dataMYSQL($data = '') {
+            if ($data == '')
+                return '';
+            return implode('-', array_reverse(explode('/', $data)));
+        }
+}
+
+// ------------------------------------------------------------------------
+
+/**
+ * Formata a Data no Formato Humano
+ *
+ * Retorna no formato DD/MM/AAAA
+ *
+ * @access	public
+ * @param	string
+ * @return	string
+ */
+if ( ! function_exists('dataHumano'))
+{
+	function dataHumano($data = '') {
+            if ($data == '')
+                return '';
+            return implode('/', array_reverse(explode('-', $data)));
+        }
+}
+
+// ------------------------------------------------------------------------
+
+/**
  * Get "now" time
  *
  * Returns time() or its GMT equivalent based on the config file preference

@@ -49,6 +49,7 @@
     function addItemListaDinamica(controller, formulario, lista, divFormulario) {
         
         if ($('#formAddItem').validate().form()) {
+            $("#msg").html("Enviado Formulário...");
             //$(formulario+" > .flash").show();
             //$(formulario+" > .flash").fadeIn(400).html('<img src="../imagens/loader.gif" align="absmiddle"> <span class="loading">Incluindo...</span>');
         
@@ -59,9 +60,7 @@
                 //                    $(formulario+" > .flash").hide();
                 //                    $(divFormulario).slideToggle('slow');
                 $("#msg").html(html);
-                $(formulario +" :input[type=text]").each(function(index) {
-                    //$(this).val("");
-                });
+                btnCancelarItem();
             });
         }
         return false;
@@ -78,10 +77,15 @@
     
     function btnCancelarItem(){
         $('#divAddItem').hide('slow');
-        $("#divAddItem :input[type=text]").each(function(index) {
+        $('#divAddItem .dinheiro').each(function(index) {
+            $(this).val("0,00");
+        });
+        $('#divAddItem .data').each(function(index) {
             $(this).val("");
         });
-        //$(formulario).validate().resetForm();
+        
+        $('#rbtnVista').click();
+        $("#formAddItem").validate().resetForm();
     }
     
     function carregarItemFornecedorByCategoria(categoria) {
@@ -119,17 +123,24 @@
         /* Regras de Validação do Formulário*/
         $("#formAddItem").validate({
             rules: {
+                categorias: {required: true},
+                items: {required: true},
                 DataExecucao: {required: true},
-                ValorPrevisto: {required:true}
+                ValorPrevisto: {required: function(element) {
+                        //alert(element.value == "0,00");
+                        return false;//(element.value == "0,00");
+                    }}
             },
             messages: {
                 DataExecucao: { required: "" },
-                ValorPrevisto: { required: "" }
+                ValorPrevisto: { required: "" },
+                categorias: {required: ""},
+                items: {required: ""}
             }
         });
     });
 </script>
-<div id="msg"></div>
+<div id="msg" style="font-size: 18px; color: red;">teste</div>
 <div id="divAddItem" class="divFomularioListasDinamicas">
     <form id="formAddItem">
         <table width="100%" border="0">
@@ -189,7 +200,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="label" colspan="2"> Forma de Pagamento: </td>
+                <td class="label" colspan="2"> Pagamento: </td>
                 <td colspan="4"> 
                     <input type="radio" name="FormaPagamento" id="rbtnVista" value="V" checked="checked" onclick="$('#divPrestacoes').hide();"> <label for="rbtnVista">À Vista</label>
                     <input type="radio" name="FormaPagamento" id="rbtnPrazo" value="P" onclick="listarParcelas();"> <label for="rbtnPrazo">A Prazo</label>

@@ -78,7 +78,7 @@
 /* INICIO Styles dos formularios das listas dinamicas e dos cadastros */
 .divFomularioListasDinamicas {
     border: #ddd solid 1px;
-    display: block; 
+    display: none; 
     background-color: #EFEFEF;
     margin-bottom: 10px;
     padding: 5px;
@@ -271,4 +271,8 @@
 
 .dinheiro {
     width: 90px;
+}
+
+.error {
+    border: solid 1px red;
 }
