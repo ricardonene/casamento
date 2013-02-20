@@ -5592,9 +5592,19 @@ INSERT INTO `Cidade` VALUES(5563, 'Wanderlândia', 'TO');
 INSERT INTO `Cidade` VALUES(5564, 'Xambioá', 'TO');
 
 
+--
+-- Extraindo dados da tabela `Fornecedor`
+--
 
 INSERT INTO `Fornecedor` VALUES(2, 'Bruno Messina', NULL, '(48) 9981-3102', 'Bruno Messina', NULL, 4500, 'www.brunomessina.com.br', 'contato@brunomessina.com.br');
 INSERT INTO `Fornecedor` VALUES(4, 'Igreja Santa Catarina de Alexandria', NULL, NULL, 'Pe. Fulano', NULL, 4500, NULL, NULL);
+
+--
+-- Extraindo dados da tabela `CategoriaFornecedor`
+--
+
+INSERT INTO `CategoriaFornecedor` VALUES(2, 1);
+INSERT INTO `CategoriaFornecedor` VALUES(4, 2);
 
 --
 -- Extraindo dados da tabela `Item`
@@ -5619,34 +5629,6 @@ INSERT INTO `Usuario` VALUES(2, 'gcpoerscke@gmail.com', NULL, 'Greice Cunha Poer
 -- Extraindo dados da tabela `Casamento`
 --
 
-INSERT INTO `Casamento` VALUES(2, 2, 1, NULL, '2014-01-25', 4500);
+INSERT INTO `Casamento` VALUES(1, 2, 1, NULL, '2014-01-25', 4500);
 
---
--- Extraindo dados da tabela `Planejamento`
---
 
-INSERT INTO `Planejamento` VALUES(1, 0, 0, 0, 0, 0, 2);
-
---
--- Extraindo dados da tabela `ItemPlanejamento`
---
-
-INSERT INTO `ItemPlanejamento` VALUES(6, 1, 4000, 5000, 1000, NULL, 4000, 2, '0000-00-00', 'V');
-INSERT INTO `ItemPlanejamento` VALUES(8, 1, 2000, 0, 0, NULL, 0, 0, '0000-00-00', 'V');
-INSERT INTO `ItemPlanejamento` VALUES(10, 1, 156, 2500, 0, NULL, 2500, 4, '0000-00-00', 'P');
-
---
--- Extraindo dados da tabela `Pagamento`
---
-
-INSERT INTO `Pagamento` VALUES(1, '0000-00-00', 1000, 10, 1);
-INSERT INTO `Pagamento` VALUES(2, '0000-00-00', 500, 10, 1);
-INSERT INTO `Pagamento` VALUES(3, '2012-01-28', 500, 10, 1);
-INSERT INTO `Pagamento` VALUES(4, '2012-02-28', 500, 10, 1);
-
---
--- Extraindo dados da tabela `CategoriaFornecedor`
---
-
-INSERT INTO `CategoriaFornecedor` VALUES(2, 1);
-INSERT INTO `CategoriaFornecedor` VALUES(4, 2);

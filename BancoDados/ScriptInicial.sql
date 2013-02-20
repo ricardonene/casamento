@@ -1,6 +1,6 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
 DROP SCHEMA IF EXISTS `DBCasamento` ;
 CREATE SCHEMA IF NOT EXISTS `DBCasamento` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
@@ -48,8 +48,8 @@ CREATE  TABLE IF NOT EXISTS `DBCasamento`.`Usuario` (
   `EMail` VARCHAR(150) NULL ,
   `Senha` VARCHAR(100) NULL ,
   `Nome` VARCHAR(100) NULL ,
-  `Perfil` VARCHAR(1) NULL DEFAULT '1' COMMENT '0- Administrador\\n1- Noivos\\n2- Cerinomialista/Assessoria' ,
-  `Confirmado` TINYINT(1) NULL DEFAULT 0 ,
+  `Perfil` VARCHAR(1) NULL DEFAULT '1' COMMENT '0- Administrador\n1- Noivos\n2- Cerinomialista/Assessoria' ,
+  `Confirmado` TINYINT(1)  NULL DEFAULT 0 ,
   PRIMARY KEY (`idUsuario`) )
 ENGINE = InnoDB;
 
@@ -108,21 +108,31 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `DBCasamento`.`Planejamento`
+-- Table `DBCasamento`.`ItemCasamento`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `DBCasamento`.`Planejamento` ;
+DROP TABLE IF EXISTS `DBCasamento`.`ItemCasamento` ;
 
-CREATE  TABLE IF NOT EXISTS `DBCasamento`.`Planejamento` (
-  `idPlanejamento` INT NOT NULL AUTO_INCREMENT ,
-  `TotalPrevisto` DOUBLE NULL ,
-  `TotalContratado` DOUBLE NULL ,
-  `TotalPago` DOUBLE NULL ,
-  `SaldoDevedor` DOUBLE NULL ,
-  `Percentual` DOUBLE NULL ,
+CREATE  TABLE IF NOT EXISTS `DBCasamento`.`ItemCasamento` (
+  `idItemCasamento` INT NOT NULL AUTO_INCREMENT ,
+  `FK_idItem` INT NOT NULL ,
   `FK_idCasamento` INT NOT NULL ,
-  PRIMARY KEY (`idPlanejamento`, `FK_idCasamento`) ,
-  INDEX `fk_Planejamento_Casamento1_idx` (`FK_idCasamento` ASC) ,
-  CONSTRAINT `fk_Planejamento_Casamento1`
+  `ValorPrevisto` DOUBLE NULL ,
+  `ValorContratado` DOUBLE NULL ,
+  `ValorPago` DOUBLE NULL ,
+  `Percentual` DOUBLE NULL ,
+  `SaldoDevedor` DOUBLE NULL ,
+  `FK_idFornecedor` INT NULL ,
+  `DataExecucao` DATE NULL ,
+  `FormaPagamento` VARCHAR(1) NULL DEFAULT 'V' COMMENT 'V- Vista\nP- Prazo' ,
+  PRIMARY KEY (`idItemCasamento`) ,
+  INDEX `fk_Item_has_Planejamento_Item1_idx` (`FK_idItem` ASC) ,
+  INDEX `fk_ItemCasamento_Casamento1` (`FK_idCasamento` ASC) ,
+  CONSTRAINT `fk_Item_has_Planejamento_Item1`
+    FOREIGN KEY (`FK_idItem` )
+    REFERENCES `DBCasamento`.`Item` (`idItem` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ItemCasamento_Casamento1`
     FOREIGN KEY (`FK_idCasamento` )
     REFERENCES `DBCasamento`.`Casamento` (`idCasamento` )
     ON DELETE NO ACTION
@@ -156,54 +166,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `DBCasamento`.`ItemPlanejamento`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `DBCasamento`.`ItemPlanejamento` ;
-
-CREATE  TABLE IF NOT EXISTS `DBCasamento`.`ItemPlanejamento` (
-  `FK_idItem` INT NOT NULL ,
-  `FK_idPlanejamento` INT NOT NULL ,
-  `ValorPrevisto` DOUBLE NULL ,
-  `ValorContratado` DOUBLE NULL ,
-  `ValorPago` DOUBLE NULL ,
-  `Percentual` DOUBLE NULL ,
-  `SaldoDevedor` DOUBLE NULL ,
-  `FK_idFornecedor` INT NOT NULL ,
-  `DataExecucao` DATE NULL ,
-  `FormaPagamento` VARCHAR(1) NULL DEFAULT 'V' COMMENT 'V- Vista\\nP- Prazo' ,
-  PRIMARY KEY (`FK_idItem`, `FK_idPlanejamento`) ,
-  INDEX `fk_Item_has_Planejamento_Planejamento1_idx` (`FK_idPlanejamento` ASC) ,
-  INDEX `fk_Item_has_Planejamento_Item1_idx` (`FK_idItem` ASC) ,
-  INDEX `fk_ItemPlanejamento_Fornecedores1_idx` (`FK_idFornecedor` ASC) ,
-  CONSTRAINT `fk_Item_has_Planejamento_Item1`
-    FOREIGN KEY (`FK_idItem` )
-    REFERENCES `DBCasamento`.`Item` (`idItem` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Item_has_Planejamento_Planejamento1`
-    FOREIGN KEY (`FK_idPlanejamento` )
-    REFERENCES `DBCasamento`.`Planejamento` (`idPlanejamento` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ItemPlanejamento_Fornecedores1`
-    FOREIGN KEY (`FK_idFornecedor` )
-    REFERENCES `DBCasamento`.`Fornecedor` (`idFornecedores` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `DBCasamento`.`Convite`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `DBCasamento`.`Convite` ;
 
 CREATE  TABLE IF NOT EXISTS `DBCasamento`.`Convite` (
   `idConvite` INT NOT NULL AUTO_INCREMENT ,
-  `Entregue` TINYINT(1) NULL DEFAULT 0 ,
-  `Confirmado` TINYINT(1) NULL DEFAULT 0 ,
-  `Compareceu` TINYINT(1) NULL DEFAULT 0 ,
-  `Categoria` VARCHAR(1) NULL DEFAULT 0 COMMENT '0- Não Definido\\n1- Família Noiva\\n2- Família Noivo\\n3- Amigo Noiva\\n4- Amigo Noivo\\n5- Amigo Comum\\n6- Outros' ,
+  `Entregue` TINYINT(1)  NULL DEFAULT 0 ,
+  `Confirmado` TINYINT(1)  NULL DEFAULT 0 ,
+  `Compareceu` TINYINT(1)  NULL DEFAULT 0 ,
+  `Categoria` VARCHAR(1) NULL DEFAULT 0 COMMENT '0- Não Definido\n1- Família Noiva\n2- Família Noivo\n3- Amigo Noiva\n4- Amigo Noivo\n5- Amigo Comum\n6- Outros' ,
   `NomeConvite` VARCHAR(100) NULL ,
   `NumeroConvidados` INT NULL ,
   `FK_idCasamento` INT NOT NULL ,
@@ -258,13 +230,12 @@ CREATE  TABLE IF NOT EXISTS `DBCasamento`.`Pagamento` (
   `idPagamento` INT NOT NULL AUTO_INCREMENT ,
   `Data` DATE NULL ,
   `Valor` DOUBLE NULL DEFAULT 0 ,
-  `FK_idItem` INT NOT NULL ,
-  `FK_idPlanejamento` INT NOT NULL ,
-  PRIMARY KEY (`idPagamento`, `FK_idItem`, `FK_idPlanejamento`) ,
-  INDEX `fk_Pagamento_ItemPlanejamento1_idx` (`FK_idItem` ASC, `FK_idPlanejamento` ASC) ,
-  CONSTRAINT `fk_Pagamento_ItemPlanejamento1`
-    FOREIGN KEY (`FK_idItem` , `FK_idPlanejamento` )
-    REFERENCES `DBCasamento`.`ItemPlanejamento` (`FK_idItem` , `FK_idPlanejamento` )
+  `FK_idItemCasamento` INT NOT NULL ,
+  PRIMARY KEY (`idPagamento`, `FK_idItemCasamento`) ,
+  INDEX `fk_Pagamento_ItemCasamento1` (`FK_idItemCasamento` ASC) ,
+  CONSTRAINT `fk_Pagamento_ItemCasamento1`
+    FOREIGN KEY (`FK_idItemCasamento` )
+    REFERENCES `DBCasamento`.`ItemCasamento` (`idItemCasamento` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
