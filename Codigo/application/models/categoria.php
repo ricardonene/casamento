@@ -12,13 +12,4 @@ class Categoria extends CI_Model {
             return $get->result_array();
         return array();
     }
-    
-    function listarItems($idCategoria) {
-        $this->db->where('FK_idCategoria', $idCategoria); 
-        $get = $this->db->get('Item');
-        if ($get->num_rows > 0)
-            return $get->result_array();
-        return array();
-    }
-
 }

@@ -28,6 +28,45 @@
 // ------------------------------------------------------------------------
 
 /**
+ * Formata um numero do MySql para real
+ * Ex.: 5000.00 -> 5.000,00
+ * 
+ * @access	public
+ * @param	mixed	// will be cast as int
+ * @return	string
+ */
+if ( ! function_exists('moedaRS'))
+{
+	function real_format($valor = '')
+	{
+            if ($valor == '')
+                return '';
+            
+            return number_format($valor, 2, ',', '.');
+	}
+}
+
+/**
+ * Formata um numero do real para MySql
+ * Ex.: 5.000,00 -> 5000.00
+ *
+ * @access	public
+ * @param	mixed	// will be cast as int
+ * @return	string
+ */
+if ( ! function_exists('mysql_format'))
+{
+	function mysql_format($valor = '')
+	{
+            if ($valor == '')
+                return '';
+            
+            $valor = str_replace('.', '', $valor);
+            return str_replace(',', '.', $valor);
+	}
+}
+
+/**
  * Formats a numbers as bytes, based on size, and adds the appropriate suffix
  *
  * @access	public

@@ -28,6 +28,75 @@
 // ------------------------------------------------------------------------
 
 /**
+ * Subtrai o número de meses da data
+ *
+ * @access	public
+ * @param	string
+ * @return	string
+ */
+if ( ! function_exists('dataAMenorDataB'))
+{
+	function dataAMenorDataB($dataA = '', $dataB = '') {
+            if ($dataA == '' || $dataB == '')
+                return FALSE;
+            
+            $dataA = str_replace('/', '-', $dataA);
+            $dataB = str_replace('/', '-', $dataB);
+            
+            $timestampA = strtotime($dataA);
+            $timestampB = strtotime($dataB);
+            
+            if ($timestampA < $timestampB)
+                return TRUE;
+            
+            return FALSE;
+                
+        }
+}
+
+// ------------------------------------------------------------------------
+
+/**
+ * Subtrai o número de meses da data
+ *
+ * @access	public
+ * @param	string
+ * @return	string
+ */
+if ( ! function_exists('subtraiMeses'))
+{
+	function subtraiMeses($data = '', $meses = '') {
+            if ($data == '' || $meses == '')
+                return '';
+            
+            $data = str_replace('/', '-', $data);
+            return date('d/m/Y', strtotime('-'.$meses." months",strtotime($data)));
+        }
+}
+
+// ------------------------------------------------------------------------
+
+/**
+ * Soma o número de meses na data
+ *
+ * @access	public
+ * @param	string
+ * @return	string
+ */
+if ( ! function_exists('somaMeses'))
+{
+	function somaMeses($data = '', $meses = '') {
+            if ($data == '' || $meses == '')
+                return '';
+            
+            $data = str_replace('/', '-', $data);
+            return date('d/m/Y', strtotime('+'.$meses." months",strtotime($data)));
+        }
+}
+
+// ------------------------------------------------------------------------
+
+/**
  * Formata a Data no Formato do MySQL
  *
  * Retorna no formato AAAA-MM-DD

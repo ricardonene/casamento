@@ -11,8 +11,12 @@ class Planejamento extends CI_Controller {
 
     public function index() {
         $dadosSessao = array(
-            'idPlanejamento' => 1
+            'idCasamento' => 2
         );
+
+        $this->load->model('Casamento');
+        $dadosSessao['DataCasamento'] = dataHumano($this->Casamento->obterDataCasamento(2));
+
         $this->session->set_userdata($dadosSessao);
 
         $dados['titulo'] = 'Planejamento';
@@ -22,19 +26,16 @@ class Planejamento extends CI_Controller {
 
 
 
-
         $this->template->load('templates/templatePadrao', 'planejamentoView', $dados);
     }
 
     public function listarItems($idCategoria = false) {
 
         $options[''] = 'Selecione o Item';
-        echo 'idCategoria: ' . $idCategoria;
-        if ($idCategoria != false) {
-            $this->load->model('Categoria');
-            /* @var $Categoria Categoria */
-            $dados = $this->Categoria->listarItems($idCategoria);
 
+        if ($idCategoria != false) {
+            $this->load->model('Item');
+            $dados = $this->Item->listarItemsPorCategoria($idCategoria);
 
             foreach ($dados as $item) {
                 $options[$item['idItem']] = $item['Descricao'];
@@ -60,46 +61,79 @@ class Planejamento extends CI_Controller {
         echo form_dropdown('fornecedores', $options, '', 'id="fornecedores"');
     }
 
+    public function calcularDataExecucao($idItem = '') {
+        if ($idItem != '') {
+            $this->load->model('Item');
+            $meses = $this->Item->obterMesesAntes($idItem);
+            $dataCasamento = $this->session->userdata('DataCasamento');
+            $dataExecucao = subtraiMeses($dataCasamento, $meses);
+            $hoje = date('d/m/Y');
+
+            if (dataAMenorDataB($hoje, $dataExecucao)) {
+                echo $dataExecucao;
+            } else {
+                echo $hoje;
+            }
+        }
+    }
+
+    public function listarItensCasamento() {
+        
+        $this->load->model('ItemCasamento');
+        $itens = $this->ItemCasamento->listarItensCasamento($this->session->userdata('idCasamento'));
+        $lista = NULL;
+        if($itens) {
+            foreach ($itens as $item) {
+                $lista[$item->idCategoria]['idCategoria'] = $item->idCategoria;
+                $lista[$item->idCategoria]['Categoria'] = $item->Categoria;
+                $lista[$item->idCategoria]['itens'][] = $item;
+            }
+            $lista['categorias'] = $lista;
+            
+            $this->load->view('itensCasamentoView',$lista);
+        }
+    }
+
     public function salvar() {
         $sucesso = FALSE;
         if ($_POST) {
-            $dados["FK_idPlanejamento"] = $this->session->userdata('idPlanejamento');
+            $dados["FK_idCasamento"] = $this->session->userdata('idCasamento');
             $dados["FK_idItem"] = $this->input->post('items');
             $dados["DataExecucao"] = dataMYSQL($this->input->post('DataExecucao'));
-            $dados["ValorPrevisto"] = $this->input->post('ValorPrevisto');
-            $dados["ValorContratado"] = $this->input->post('ValorContratado');
-            $dados["ValorPago"] = $this->input->post('ValorPago');
+            $dados["ValorPrevisto"] = mysql_format($this->input->post('ValorPrevisto'));
+            $dados["ValorContratado"] = mysql_format($this->input->post('ValorContratado'));
+            $dados["ValorPago"] = mysql_format($this->input->post('ValorPago'));
             //$dados["Percentual"] = Realizado / Total Realizado
-            $dados["SaldoDevedor"] = $dados["ValorContratado"] - $dados["ValorPago"];
+            $dados["SaldoDevedor"] = mysql_format($dados["ValorContratado"] - $dados["ValorPago"]);
             $dados["FK_idFornecedor"] = $this->input->post('fornecedores');
             $dados["FormaPagamento"] = $this->input->post('FormaPagamento');
 
-            $this->load->model('ItemPlanejamento');
-            $resultado = $this->ItemPlanejamento->inserir($dados);
-            if ($resultado == 0) {
+            $this->load->model('ItemCasamento');
+            $idItemCasamento = $this->ItemCasamento->inserir($dados);
+            if ($idItemCasamento) {
                 $sucesso = TRUE;
             } else {
-                $msg = '<br>Erro: '.$resultado;
+                $msg = '<br>Erro: ' . $this->db->_error_number() . ' - ' . $this->db->_error_message();
             }
 
             if ($dados["FormaPagamento"] == "P") {
                 $this->load->model('Pagamento');
 
-                $dadosPgto["Valor"] = $this->input->post('parcelaEntrada');
+                //Inserindo o valor da Entrada
+                $dadosPgto["Valor"] = mysql_format($this->input->post('parcelaEntrada'));
                 $dadosPgto["Data"] = dataMYSQL($this->input->post('dataEntrada'));
-                $dadosPgto["FK_idPlanejamento"] = $dados["FK_idPlanejamento"];
-                $dadosPgto["FK_idItem"] = $dados["FK_idItem"];
+                $dadosPgto["FK_idItemCasamento"] = $idItemCasamento;
                 $resultado = $this->Pagamento->inserir($dadosPgto);
 
                 $nroPrestacoes = $this->input->post('nroPrestacoes');
                 $parcelas = $this->input->post('parcelas');
                 $dataparcelas = $this->input->post('dataParcelas');
+                //Inserindo as demais parcelas
                 for ($i = 0; $i < $nroPrestacoes; $i++) {
                     $dadosPgto = NULL;
-                    $dadosPgto["Valor"] = $parcelas[$i];
+                    $dadosPgto["Valor"] = mysql_format($parcelas[$i]);
                     $dadosPgto["Data"] = dataMYSQL($dataparcelas[$i]);
-                    $dadosPgto["FK_idPlanejamento"] = $dados["FK_idPlanejamento"];
-                    $dadosPgto["FK_idItem"] = $dados["FK_idItem"];
+                    $dadosPgto["FK_idItemCasamento"] = $idItemCasamento;
                     $resultado = $this->Pagamento->inserir($dadosPgto);
                 }
             }
@@ -107,7 +141,7 @@ class Planejamento extends CI_Controller {
         if ($sucesso) {
             echo "Item salvo com sucesso.";
         } else {
-            echo "Erro ao salvar item.".$msg;
+            echo "Erro ao salvar item." . $msg;
         }
     }
 

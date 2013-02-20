@@ -61,6 +61,7 @@
                 //                    $(divFormulario).slideToggle('slow');
                 $("#msg").html(html);
                 btnCancelarItem();
+                carregarItensCasamento()
             });
         }
         return false;
@@ -77,6 +78,7 @@
     
     function btnCancelarItem(){
         $('#divAddItem').hide('slow');
+        $('#divAddItem').insertAfter('body');
         $('#divAddItem .dinheiro').each(function(index) {
             $(this).val("0,00");
         });
@@ -93,10 +95,14 @@
         $('#fornecedores').load('planejamento/listarFornecedores/'+categoria);
     }
     
-    
+    function carregarItensCasamento() {
+        $('#divItensCasamento').load('planejamento/listarItensCasamento');
+    }
     
     $(document).ready(function(){
         criarMascaras();
+        carregarItensCasamento();
+        
 
         /** Calcula as parcelas quando o usuário altera o valor:
          *  Entrada, ValorContratado
@@ -120,6 +126,13 @@
             carregarItemFornecedorByCategoria($('#categorias').val());
         });
         
+        /* Calcula a data execução ao alterar o item*/
+        $('#items').change(function(){
+            $.get('planejamento/calcularDataExecucao/'+$('#items').val(), function (data){
+                $('#DataExecucao').val(data);
+            });
+        });
+        
         /* Regras de Validação do Formulário*/
         $("#formAddItem").validate({
             rules: {
@@ -140,7 +153,10 @@
         });
     });
 </script>
-<div id="msg" style="font-size: 18px; color: red;">teste</div>
+<div id="msg" style="font-size: 18px; color: red;">
+    <?php
+    ?>
+</div>
 <div id="divAddItem" class="divFomularioListasDinamicas">
     <form id="formAddItem">
         <table width="100%" border="0">
@@ -254,40 +270,9 @@
         </fieldset>
     </div>
     <br />
-
-    <?php
-    // var_dump($categorias);
-    foreach ($categorias as $categoria) {
-        ?>
-        <table cellspacing="0" class="tabelaItensPlanejados" id="tblCategoria<?php echo $categoria['idCategoria']; ?>">
-            <tr>
-                <th class="tituloItem"> <?php echo $categoria['Descricao']; ?> </th>
-                <th> Previsto </th>
-                <th> Contratado </th>
-                <th> Pago </th>
-                <th> Saldo Devedor </th>
-                <th style="text-align: center;"> % </th>
-            </tr>
-            <tr>
-                <td colspan="7" class="itemEspaco"> &nbsp; </td>
-            </tr>
-            <?php for ($i = 0; $i < 5; $i++) { ?>
-                <tr>
-                    <td class="descricaoItem"> Lembrança Padrinhos e Pais 
-                        <br> <span class="fornecedorItem">Nossa Senhora Catarina de Alexandria</span> 
-                    </td>
-                    <td class="itemPlanejado">R$ <?= rand(0, 10000) ?>,00 </td>
-                    <td class="itemPlanejado"> <?= rand(0, 100000) ?>,00 </td>
-                    <td class="itemPlanejado"> <?= rand(0, 100000) ?>,00 </td>
-                    <td class="itemPlanejado"> <?= rand(0, 100000) ?>,00 </td>
-                    <td class="itemPlanejado"> <?= rand(0, 100) ?>% </td>
-                </tr>
-            <?php } ?>
-            <tr>
-                <td style="text-align: left;"> <input type="button" value="Novo Item" onclick="mostrarFormulario(<?php echo $categoria['idCategoria']; ?>);"> </td>
-            </tr>
-        </table>
-    <?php } ?>
+    <div id="divItensCasamento">
+        
+    </div>
 </center>
 
 <div class="clear"></div>
