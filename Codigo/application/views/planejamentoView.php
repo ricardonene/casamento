@@ -61,7 +61,8 @@
                 //                    $(divFormulario).slideToggle('slow');
                 $("#msg").html(html);
                 btnCancelarItem();
-                carregarItensCasamento()
+                carregarItensCasamento();
+                carregarTotaisGastos();                
             });
         }
         return false;
@@ -99,10 +100,64 @@
         $('#divItensCasamento').load('planejamento/listarItensCasamento');
     }
     
+    function carregarTotaisGastos() {
+        $('#divTotalGastos').load('planejamento/totalGastos');
+    }
+    
+    function carregarUF() {
+        $('#uf').load('cidade/listarUF');
+    }
+    
+    function carregarCidades() {
+        $('#uf').change(function(){
+            $('#cidade').load('cidade/listarCidades/'+$('#uf').val());
+        });
+    }
+    
+    function carregarCheckBoxCategorias(idCategoria) {
+        $('#divListaCategorias').load('planejamento/checkBoxCategorias/'+idCategoria);
+    }
+    
+    function novoFornecedor() {
+        carregarCheckBoxCategorias($('#categorias').val());
+        $( '#divAddFornecedor' ).dialog( 'open' );
+    }
+    
     $(document).ready(function(){
         criarMascaras();
         carregarItensCasamento();
+        carregarTotaisGastos();
+        carregarUF();
+        carregarCidades();
         
+        $( '#divAddFornecedor' ).dialog({
+            autoOpen: false,
+            resizable: true,
+            width: 700,
+            height: 500,
+            modal: true,
+            title: 'Novo Fornecedor',
+            buttons: {
+                'Salvar': function() {
+                    if ($('#formAddFornecedor').validate().form()) {
+                        $.post("planejamento/salvarFornecedor", $(formAddFornecedor).serialize(), function (html) {
+                            $("#msg").html(html);
+                            $('#fornecedores').load('planejamento/listarFornecedores/'+$('#categorias').val()+'/1');
+                        });
+                        $('#formAddFornecedor input').each(function(index) {
+                            $(this).val("");
+                        });
+                        $( this ).dialog( "close" );
+                    }
+                },
+                'Cancelar': function() {
+                    $('#formAddFornecedor input').each(function(index) {
+                        $(this).val("");
+                    });
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
 
         /** Calcula as parcelas quando o usuário altera o valor:
          *  Entrada, ValorContratado
@@ -133,7 +188,7 @@
             });
         });
         
-        /* Regras de Validação do Formulário*/
+        /* Regras de Validação do Formulário Item*/
         $("#formAddItem").validate({
             rules: {
                 categorias: {required: true},
@@ -151,12 +206,106 @@
                 items: {required: ""}
             }
         });
+        
+        /* Regras de Validação do Formulário Fornecedor*/
+        $("#formAddFornecedor").validate({
+            rules: {
+                Nome: {required: true},
+                Responsavel: {required: true},
+                Telefone: {required: true},
+                EMail: {email: true},
+                uf: {required: true},
+                cidade: {required: true},
+                chkCategorias : {required: true }
+            },
+            messages: {
+                Nome: {required: ''},
+                Responsavel: {required: ''},
+                Telefone: {required: ''},
+                EMail: {email: ''},
+                uf: {required: ''},
+                cidade: {required: ''},
+                chkCategorias : {required: '' }
+            }
+        });
     });
 </script>
 <div id="msg" style="font-size: 18px; color: red;">
-    <?php
-    ?>
+    <?php ?>
 </div>
+
+<div id="divAddFornecedor" class="divFomularioListasDinamicas">
+    <form id="formAddFornecedor">
+        <table width="100%" border="0">
+            <tr>
+                <td class="label" width="25%"> Nome*: </td>
+                <td colspan="3">
+                    <input class="inputText" type="text" name="Nome" id="Nome" value=""> 
+                </td>
+            </tr>
+            <tr>
+                <td class="label"> Responsável*: </td>
+                <td colspan="3"> 
+                    <input class="inputText" type="text" name="Responsavel" id="Responsavel" value=""> 
+
+                </td>
+            </tr>
+            <tr>
+                <td class="label"> Telefone*: </td>
+                <td> 
+                    <input class="inputText telefone" type="text" name="Telefone" id="Telefone" value=""> 
+                </td>
+                <td class="label"> Celular: </td>
+                <td> 
+                    <input class="inputText telefone" type="text" name="Celular" id="Celular" value=""> 
+
+                </td>
+            </tr>
+            <tr>
+                <td class="label"> E-Mail: </td>
+                <td> 
+                    <input class="inputText" type="text" name="EMail" id="EMail" value=""> 
+
+                </td>
+                <td class="label"> Site: </td>
+                <td> 
+                    <input class="inputText" type="text" name="Site" id="Site" value=""> 
+
+                </td>
+            </tr>
+            <tr>
+                <td class="label"> Endereço: </td>
+                <td colspan="3"> 
+                    <input class="inputText" type="text" name="Endereco" id="Endereco" value=""> 
+                </td>
+            </tr>
+            <tr>
+                <td class="label"> Estado/Cidade*: </td>
+                <td colspan="3">
+                    <?php
+                    $options = array('' => 'UF');
+                    echo form_dropdown('uf', $options, '', 'id="uf"');
+                    ?>
+
+
+                    <?php
+                    $options = array('' => 'Cidade');
+                    echo form_dropdown('cidade', $options, '', 'id="cidade"');
+                    ?>
+
+
+                </td>
+            </tr>
+            <tr>
+                <td class="label"> Categorias*: </td>
+                <td colspan="4"> 
+                    <div id="divListaCategorias"></div>
+                </td>
+            </tr>       
+        </table>
+    </form>
+</div>
+
 <div id="divAddItem" class="divFomularioListasDinamicas">
     <form id="formAddItem">
         <table width="100%" border="0">
@@ -171,7 +320,7 @@
                     <?php
                     $options = array('' => 'Selecione a Categoria');
                     foreach ($categorias as $categoria)
-                        $options[$categoria['idCategoria']] = $categoria['Descricao'];
+                        $options[$categoria->idCategoria] = $categoria->Descricao;
                     echo form_dropdown('categorias', $options, '', 'id="categorias"');
                     ?>
                 </td>
@@ -211,7 +360,7 @@
                     $options = array('' => 'Selecione a Categoria');
                     echo form_dropdown('fornecedores', $options, '', 'id="fornecedores"');
                     ?>
-                    <input type="button" value="Novo Fornecedor">
+                    <input type="button" value="Novo Fornecedor" onclick="novoFornecedor()">
 
                 </td>
             </tr>
@@ -250,29 +399,9 @@
 </div>
 
 <center>
-    <div id="totalGastos">
-        <fieldset>
-            <legend>Total dos Gastos</legend>
-            <table border="0" width="100%">
-                <tr>
-                    <td> Previsto </td>
-                    <td> R$ <?php echo rand(10, 100000); ?>,00 </td>
-                    <td> Realizado </td>
-                    <td> R$ <?php echo rand(10, 100000); ?>,00 </td>
-                    <td> Pago </td>
-                    <td> R$ <?php echo rand(10, 100000); ?>,00 </td>
-                    <td> Saldo Devedor </td>
-                    <td> R$ <?php echo rand(10, 100000); ?>,00 </td>
-                    <td> Percentual Total Pago </td>
-                    <td> <?php echo rand(0, 100); ?>% </td>
-                </tr>
-            </table>
-        </fieldset>
-    </div>
+    <div id="divTotalGastos"></div>
     <br />
-    <div id="divItensCasamento">
-        
-    </div>
+    <div id="divItensCasamento"></div>
 </center>
 
 <div class="clear"></div>

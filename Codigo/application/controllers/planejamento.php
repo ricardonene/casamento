@@ -21,10 +21,8 @@ class Planejamento extends CI_Controller {
 
         $dados['titulo'] = 'Planejamento';
 
-        $this->load->model('Categoria');
-        $dados['categorias'] = $this->Categoria->listarTodos();
-
-
+        $this->load->model('Categoria_Model');
+        $dados['categorias'] = $this->Categoria_Model->listarTodos();
 
         $this->template->load('templates/templatePadrao', 'planejamentoView', $dados);
     }
@@ -44,21 +42,49 @@ class Planejamento extends CI_Controller {
         echo form_dropdown('items', $options, '', 'id="items"');
     }
 
-    public function listarFornecedores($idCategoria = false) {
-
+    public function listarFornecedores($idCategoria = FALSE, $ultimo = FALSE) {
         $options[''] = 'Selecione o Fornecedor';
-        echo 'idCategoria: ' . $idCategoria;
-        if ($idCategoria != false) {
-            $this->load->model('Fornecedor');
-
-            $dados = $this->Fornecedor->listarPorCategoria($idCategoria);
-
-
+        if ($idCategoria != FALSE) {
+            $this->load->model('Fornecedor_Model');
+            $dados = $this->Fornecedor_Model->listarPorCategoria($idCategoria);
+            $selecionado = 0;
             foreach ($dados as $fornecedor) {
                 $options[$fornecedor['idFornecedores']] = $fornecedor['Nome'];
+                if($ultimo) {
+                    if ($selecionado < $fornecedor['idFornecedores']) {
+                        $selecionado = $fornecedor['idFornecedores'];
+                    }
+                }
             }
         }
-        echo form_dropdown('fornecedores', $options, '', 'id="fornecedores"');
+        echo form_dropdown('fornecedores', $options, $selecionado, 'id="fornecedores"');
+    }
+
+    public function checkBoxCategorias($idcategoria = '') {
+        $this->load->model('Categoria_Model');
+        $dados = $this->Categoria_Model->listarTodos();
+        if ($dados) {
+            $checado = FALSE;
+            $cont = 0;
+            $tabela = '<table border="0"> <tr>';
+            foreach ($dados as $categoria) {
+                $checado = $idcategoria == $categoria->idCategoria ? TRUE : FALSE;
+                $idCheck = 'chkCategoria' . $categoria->idCategoria;
+                $check = array(
+                    'name' => 'chkCategorias[]',
+                    'id' => $idCheck,
+                    'value' => $categoria->idCategoria,
+                    'checked' => $checado
+                );
+                $tabela .= $cont % 3 == 0 ? '</tr><tr>' : '';
+                $tabela .= '<td>';
+                $tabela .= form_checkbox($check) . form_label($categoria->Descricao, $idCheck);
+                $tabela .= '</td>';
+                $cont++;
+            }
+            $tabela .= '</tr></table>';
+            echo $tabela;
+        }
     }
 
     public function calcularDataExecucao($idItem = '') {
@@ -78,21 +104,32 @@ class Planejamento extends CI_Controller {
     }
 
     public function listarItensCasamento() {
-        
-        $this->load->model('ItemCasamento');
-        $itens = $this->ItemCasamento->listarItensCasamento($this->session->userdata('idCasamento'));
+        $this->load->model('ItemCasamento_Model');
+        $itens = $this->ItemCasamento_Model->listarItensCasamento($this->session->userdata('idCasamento'));
         $lista = NULL;
-        if($itens) {
+        if ($itens) {
             foreach ($itens as $item) {
                 $lista[$item->idCategoria]['idCategoria'] = $item->idCategoria;
                 $lista[$item->idCategoria]['Categoria'] = $item->Categoria;
                 $lista[$item->idCategoria]['itens'][] = $item;
             }
             $lista['categorias'] = $lista;
-            
-            $this->load->view('itensCasamentoView',$lista);
+
+            $this->load->view('planejamento/itensCasamentoView', $lista);
         }
     }
+    
+    public function totalGastos() {
+        $this->load->model('ItemCasamento_Model');
+        $totais = $this->ItemCasamento_Model->obterTotalGastos($this->session->userdata('idCasamento'));
+        if ($totais) {
+            $totais[0]['SaldoDevedor'] = $totais[0]['ValorContratado'] - $totais[0]['ValorPago'];
+            $totais[0]['PercentualPago'] = ($totais[0]['ValorPago'] / $totais[0]['ValorContratado'] * 100);
+            $this->load->view('planejamento/totalGastosView', $totais[0]);
+        }
+    }
+    
+    
 
     public function salvar() {
         $sucesso = FALSE;
@@ -108,8 +145,8 @@ class Planejamento extends CI_Controller {
             $dados["FK_idFornecedor"] = $this->input->post('fornecedores');
             $dados["FormaPagamento"] = $this->input->post('FormaPagamento');
 
-            $this->load->model('ItemCasamento');
-            $idItemCasamento = $this->ItemCasamento->inserir($dados);
+            $this->load->model('ItemCasamento_Model');
+            $idItemCasamento = $this->ItemCasamento_Model->inserir($dados);
             if ($idItemCasamento) {
                 $sucesso = TRUE;
             } else {
@@ -142,6 +179,35 @@ class Planejamento extends CI_Controller {
             echo "Item salvo com sucesso.";
         } else {
             echo "Erro ao salvar item." . $msg;
+        }
+    }
+
+    public function salvarFornecedor() {
+        if ($_POST) {
+            $dados['Nome'] = $this->input->post('Nome');
+            $dados['Responsavel'] = $this->input->post('Responsavel');
+            $dados['Telefone'] = $this->input->post('Telefone');
+            $dados['Celular'] = $this->input->post('Celular');
+            $dados['EMail'] = $this->input->post('EMail');
+            $dados['Site'] = $this->input->post('Site');
+            $dados['Endereco'] = $this->input->post('Endereco');
+            $dados['FK_idCidade'] = $this->input->post('cidade');
+            
+            $this->load->model('Fornecedor_Model');
+            $idFornecedor = $this->Fornecedor_Model->inserir($dados);
+            
+            if($idFornecedor) {
+                $listaCategorias = $this->input->post('chkCategorias');
+                foreach ($listaCategorias as $categoria) {
+                    $dadosCF['FK_idFornecedores'] = $idFornecedor;
+                    $dadosCF['FK_idCategoria'] = $categoria;
+                    $idFornecedor = $this->Fornecedor_Model->inserirCategoria($dadosCF);
+                }
+                echo 'Fornecedor salvo com sucesso!';
+            } else {
+                echo '<br>Erro: ' . $this->db->_error_number() . ' - ' . $this->db->_error_message();
+            }
+            
         }
     }
 
