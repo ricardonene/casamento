@@ -1,278 +1,38 @@
 @corTitulo: #008F8B;
 @tamanhoListaItem: 80%;
 
-#totalGastos {
 
-    padding: 0px;
-    margin: 0px;
-    border: solid red 0px;
-}
-
-#listaPlanejamento {
-    float: left;
-    padding: 0px;
-    margin: 0px;
-    border: solid red 0px;
-    width: 75%;
-}
-
-.tabelaItensPlanejados {
-    border: solid 0px #EFEFEF;
-    width: @tamanhoListaItem;
-    margin-bottom: 15px;
-
-    th {
-        border-top: solid 0px #CFCFCF;
-        border-bottom: solid 1px #CFCFCF;
-        font-size: 14px;
-        color: #AAA;
-        text-align: right;
-    }
-
-    td {
-        font-size: 14px;
-        text-align: right;
-        padding-top: 2px;
-    }
-
-    .tituloItem {
-        text-align: left;
-        color: @corTitulo;
-        text-transform: uppercase;
-        font-size: 18px;
-        font-weight: bold;
-        width: 300px;
-    }
-    .descricaoItem {
-        color: #000;
-        padding-left: 5px;
-        font-size: 15px;
-        font-weight: bold;
-        text-align: left;
-        vertical-align: top;
-    }
-
-    .fornecedorItem {
-        color: #999;
-        font-weight: normal;
-        text-transform: none;
-        font-size: 13px;
-    }
-
-    .itemPlanejado {
-        border-bottom: solid 2px white;
-        background-color: #EFEFEF;
-        color: @corTitulo;
-        padding: 5px;
-        font-weight: bold;
-    }
-
-    .itemEspaco {
-        background-color: white;
-        font-size: 2px;
-    }
-
-}
-
-
-/* INICIO Styles dos formularios das listas dinamicas e dos cadastros */
-.divFomularioListasDinamicas {
-    border: #ddd solid 1px;
-    display: none; 
-    background-color: #EFEFEF;
-    margin-bottom: 10px;
-    padding: 5px;
-    width: @tamanhoListaItem;
-}
-
-.divFomularioListasDinamicas td {
-    vertical-align: top;
-    padding-top: 5px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-}
-
-.divFomularioListasDinamicas .label {
-    vertical-align: top;
-    text-align: right;
+.tituloItem {
+    text-align: left;
+    color: @corTitulo;
+    text-transform: uppercase;
+    font-size: 18px;
     font-weight: bold;
-    color: #666;
+    width: 250px;
 }
-.divFomularioListasDinamicas .labelCabecalho {
-    border-bottom: solid 1px #CCC;
+.descricaoItem {
+    color: #000;
+    padding-left: 0px;
+    font-size: 15px;
     font-weight: bold;
-    font-size: 11pt;
-    color: #333333;
-}
-
-.divFomularioListasDinamicas .labelRodape {
-    text-align: center;
-    border-top: solid 1px #CCC;
-    font-weight: bold;
-    height: 50px;
-    padding-bottom: 0px;
-}
-
-.divFomularioListasDinamicas input.error{
-    border: 1px solid red;
-}
-/* FIM Styles dos formularios das listas dinamicas */
-
-/* INICIO Styles dos formularios dos cadastros */
-.formularioCadastroPadrao td {
+    text-align: left;
     vertical-align: top;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-}
-.formularioCadastroPadrao label {
-    vertical-align: top;
-    padding-top: 5px;
-    font-weight: bold;
-    color: #666;
 }
 
-.formularioCadastroPadrao .colunaEsquerda {
-    vertical-align: top;
-    text-align: right;
-    padding-top: 5px;
-    font-weight: bold;
-    color: #666;
-}
-/* FIM Styles dos formularios dos cadastros */
-
-/*BOTOES*/
-.botaoFecharPequeno {
-    background-image: url("../img/delete.png");
-    background-repeat:no-repeat;
-    height: 11px;
-    margin-top: 1px;
-    width: 11px;
-    cursor: pointer;
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    zoom: 1;
-}
-
-.botaoFecharPequeno:hover {
-    background-image: url("../img/delete.png");
-    height: 11px;
-    margin-top: 1px;
-    width: 11px;
-    cursor: pointer;
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    zoom: 1;
-    background-position:0px -24px;
-}
-
-/*FIM BOTOES*/
-
-* 
-{
-    font-family: Trebuchet MS, Tahoma, Arial, Geneva, sans-serif;
+.fornecedorItem {
+    color: #999;
+    font-weight: normal;
+    text-transform: none;
     font-size: 13px;
 }
 
-#container
-{
-    margin: 0px;
-    background: #fff;
-    width: 1024px;
-    border: darkblue dashed 1px;
-}
-
-#header
-{
-    background: #ccc;
+.itemPlanejado {
+    border-bottom: solid 2px white;
+    background-color: #EFEFEF;
+    color: @corTitulo;
     padding: 5px;
+    font-weight: bold;
 }
 
-#header h1 { margin: 0; }
 
-#navigation
-{
-    float: right;
-    margin-top: 50px;
-    margin-right: 50px;
-}
 
-#navigation ul
-{
-    margin: 0;
-    padding: 0;
-}
-
-#navigation ul li
-{
-    list-style-type: none;
-    display: inline;
-}
-
-#navigation li a
-{
-    display: block;
-    float: left;
-    padding: 5px 10px;
-    color: #fff;
-    text-decoration: none;
-    border-right: 1px solid #fff;
-}
-
-#navigation li a:hover { color: #e13300; }
-
-#content
-{
-    clear: left;
-    padding: 10px;
-    border: solid red 0px;
-}
-
-#content h2
-{
-    color: #000;
-    font-size: 160%;
-    margin: 0 0 .5em;
-}
-
-#content h3
-{
-    color: #000;
-    font-size: 120%;
-    margin: 0;
-}
-
-#footer
-{
-    background: #ccc;
-    text-align: right;
-    padding: 5px;
-    height: 1%;
-}
-
-.clear {
-    clear: both;
-}
-#logo
-{
-    float: left;
-    border: solid red 0px;
-    width: 120px;
-    height: 120px;
-    /*background-image: url('http://thumbs.dreamstime.com/thumbimg_606/1305656289XldIoX.jpg');*/
-}
-
-/* CSS padrão para toda aplicação */
-.data {
-    width: 80px;
-}
-
-.dinheiro {
-    width: 90px;
-}
-
-.error {
-    border: solid 1px red;
-}

@@ -1,5 +1,3 @@
-<h2>Planejamento</h2>
-<div id="msg"></div>
 <script type='text/javascript' language='javascript'>
     function hoje() {
         var today = new Date(); 
@@ -38,7 +36,7 @@
                     
             clone.children(".data").val();
             clone.children(".data").attr("id", "dataParcela"+i);
-            //clone.children(".data").datepicker();
+            clone.children(".data").datepicker();
                     
             clone.children("label").html(i+ "ª Parcela:");
             clone.children("label").attr("for", "parcela"+i);
@@ -79,7 +77,7 @@
     
     function btnCancelarItem(){
         $('#divAddItem').hide('slow');
-        $('#divAddItem').insertAfter('body');
+        $('#divAddItem').insertAfter('#divAddItemAnchor');
         $('#divAddItem .dinheiro').each(function(index) {
             $(this).val("0,00");
         });
@@ -228,12 +226,15 @@
                 chkCategorias : {required: '' }
             }
         });
+        
+        $('.mnuCategoriaItem').popover();
     });
 </script>
+<h2>Planejamento</h2>
+<div id="divAddItemAnchor"></div>
 <div id="msg" style="font-size: 18px; color: red;">
     <?php ?>
 </div>
-<input type="button" value="Novo Item" onclick="mostrarFormulario(0);">
 <div id="divAddFornecedor" class="divFomularioListasDinamicas">
     <form id="formAddFornecedor">
         <table width="100%" border="0">
@@ -306,7 +307,7 @@
     </form>
 </div>
 
-<div id="divAddItem" class="divFomularioListasDinamicas">
+<div id="divAddItem" class="divFomularioListasDinamicas" style="display: none;">
     <form id="formAddItem">
         <table width="100%" border="0">
             <tr>
@@ -360,7 +361,7 @@
                     $options = array('' => 'Selecione a Categoria');
                     echo form_dropdown('fornecedores', $options, '', 'id="fornecedores"');
                     ?>
-                    <input type="button" value="Novo Fornecedor" onclick="novoFornecedor()">
+                    <input type="button" value="Novo Fornecedor" class="btn btn-small" onclick="novoFornecedor()">
 
                 </td>
             </tr>
@@ -390,18 +391,28 @@
             </tr>       
             <tr>
                 <td colspan="6" class="labelRodape">
-                    <input type="button" id="addItem" value="Adicionar" class="botaoPrincipal" onclick="addItemListaDinamica('veiculoController.php', '#formAddItem', '#listaVeiculos', '#divFormVeiculo')">
-                    <input type="button" id="cancelarItem" value="Cancelar" class="botaoSecundario" onclick="btnCancelarItem()">
+                    <input type="button" id="addItem" value="Adicionar" class="btn btn-primary" onclick="addItemListaDinamica('veiculoController.php', '#formAddItem', '#listaVeiculos', '#divFormVeiculo')">
+                    <input type="button" id="cancelarItem" value="Cancelar" class="btn" onclick="btnCancelarItem()">
                 </td>
             </tr>
         </table>
     </form>
 </div>
 
-<center>
-    <div id="divTotalGastos"></div>
-    <br />
-    <div id="divItensCasamento"></div>
-</center>
+<div class="row-fluid">
+    <div id="divMenuCategorias" class="span2" style="border: solid 0px red;">
+        <ul class="nav nav-list">
+            <li class="nav-header"> Fotos e Filmes </li>
+            <li><a href="#" class="mnuCategoriaItem" data-toggle="popover" data-placement="right" data-content="Vivamus <br/>v" title="" data-original-title="Adicionar Item"> Fotógrafo </a></li>
+            <li><a href="#"> Filmagem </a></li>
+        </ul>
 
-<div class="clear"></div>
+        <ul class="nav nav-list">
+            <li class="nav-header"> Cerimônia Civil e Religiosa </li>
+            <li><a href="#" class="mnuCategoriaItem" data-toggle="popover" data-placement="right" data-content="Vivamus " title="" data-original-title="Adicionar Item"> Fotógrafo </a></li>
+            <li><a href="#"> Filmagem </a></li>
+        </ul>
+    </div>
+    <div id="divItensCasamento" class="span7" style="border: solid 0px red;"></div>
+    <div id="divTotalGastos" class="span2" style="border: solid 1px red;"></div>
+</div>
