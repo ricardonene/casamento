@@ -150,7 +150,7 @@ CREATE  TABLE IF NOT EXISTS `DBCasamento`.`Fornecedor` (
   `Nome` VARCHAR(100) NULL ,
   `Telefone` VARCHAR(15) NULL ,
   `Celular` VARCHAR(15) NULL ,
-  `Responsável` VARCHAR(100) NULL ,
+  `Responsavel` VARCHAR(100) NULL ,
   `Endereco` VARCHAR(100) NULL ,
   `FK_idCidade` INT NOT NULL ,
   `Site` VARCHAR(150) NULL ,

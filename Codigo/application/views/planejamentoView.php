@@ -233,7 +233,7 @@
 <div id="msg" style="font-size: 18px; color: red;">
     <?php ?>
 </div>
-
+<input type="button" value="Novo Item" onclick="mostrarFormulario(0);">
 <div id="divAddFornecedor" class="divFomularioListasDinamicas">
     <form id="formAddFornecedor">
         <table width="100%" border="0">
