@@ -35,7 +35,7 @@ class Planejamento extends CI_Controller {
             }
             $dados['menuCategorias'] = $lista;
         }
-        
+
         $this->template->load('templates/templatePadrao', 'planejamentoView', $dados);
     }
 
@@ -62,7 +62,7 @@ class Planejamento extends CI_Controller {
             $selecionado = 0;
             foreach ($dados as $fornecedor) {
                 $options[$fornecedor['idFornecedores']] = $fornecedor['Nome'];
-                if($ultimo) {
+                if ($ultimo) {
                     if ($selecionado < $fornecedor['idFornecedores']) {
                         $selecionado = $fornecedor['idFornecedores'];
                     }
@@ -78,7 +78,7 @@ class Planejamento extends CI_Controller {
         if ($dados) {
             $checado = FALSE;
             $cont = 0;
-            $tabela = '<table border="0"> <tr>';
+            $tabela = '<table border="0" width="100%"> <tr>';
             foreach ($dados as $categoria) {
                 $checado = $idcategoria == $categoria->idCategoria ? TRUE : FALSE;
                 $idCheck = 'chkCategoria' . $categoria->idCategoria;
@@ -90,7 +90,9 @@ class Planejamento extends CI_Controller {
                 );
                 $tabela .= $cont % 3 == 0 ? '</tr><tr>' : '';
                 $tabela .= '<td>';
-                $tabela .= form_checkbox($check) . form_label($categoria->Descricao, $idCheck);
+                $tabela .= '<label class="checkbox inline" for="'.$idCheck.'">'.$categoria->Descricao;
+                $tabela .= form_checkbox($check);
+                $tabela .= '</label>';
                 $tabela .= '</td>';
                 $cont++;
             }
@@ -99,7 +101,7 @@ class Planejamento extends CI_Controller {
         }
     }
 
-    public function calcularDataExecucao($idItem = '') {
+    private function calcularDataExecucao($idItem = '') {
         if ($idItem != '') {
             $this->load->model('Item_Model');
             $meses = $this->Item_Model->obterMesesAntes($idItem);
@@ -131,7 +133,7 @@ class Planejamento extends CI_Controller {
             $this->load->view('planejamento/itensCasamentoView', $lista);
         }
     }
-    
+
     public function menuCategoriasItens() {
         $this->load->model('Item_Model');
         $itens = $this->Item_Model->listarTodos();
@@ -147,23 +149,28 @@ class Planejamento extends CI_Controller {
             $this->load->view('planejamento/menuCategorias', $lista);
         }
     }
-    
+
     public function totalGastos() {
         $this->load->model('ItemCasamento_Model');
         $totais = $this->ItemCasamento_Model->obterTotalGastos($this->session->userdata('idCasamento'));
         if ($totais) {
             $totais[0]['SaldoDevedor'] = $totais[0]['ValorContratado'] - $totais[0]['ValorPago'];
-            $totais[0]['PercentualPago'] = ($totais[0]['ValorPago'] / $totais[0]['ValorContratado'] * 100);
+            if ($totais[0]['ValorContratado'] != 0) {
+                $totais[0]['PercentualPago'] = ($totais[0]['ValorPago'] / $totais[0]['ValorContratado'] * 100);
+            } else {
+                $totais[0]['PercentualPago'] = 0;
+            }
             $this->load->view('planejamento/totalGastosView', $totais[0]);
         }
     }
-    
+
     public function addItem($idItem = '', $idCategoria = FALSE, $ultimo = FALSE) {
-        
+
         $dados['DataExecucao'] = $this->calcularDataExecucao($idItem);
-        
+
         $dados['idItem'] = $idItem;
-        
+        $dados['idCategoria'] = $idCategoria;
+
         $optionsFornecedor[''] = 'Selecione o Fornecedor';
         if ($idCategoria != FALSE) {
             $this->load->model('Fornecedor_Model');
@@ -171,7 +178,7 @@ class Planejamento extends CI_Controller {
             $selecionado = 0;
             foreach ($fornecedores as $fornecedor) {
                 $optionsFornecedor[$fornecedor['idFornecedores']] = $fornecedor['Nome'];
-                if($ultimo) {
+                if ($ultimo) {
                     if ($selecionado < $fornecedor['idFornecedores']) {
                         $selecionado = $fornecedor['idFornecedores'];
                     }
@@ -179,7 +186,7 @@ class Planejamento extends CI_Controller {
             }
         }
         $dados['optionsFornecedor'] = $optionsFornecedor;
-        
+
         $this->load->view('planejamento/addItem', $dados);
     }
 
@@ -244,11 +251,11 @@ class Planejamento extends CI_Controller {
             $dados['Site'] = $this->input->post('Site');
             $dados['Endereco'] = $this->input->post('Endereco');
             $dados['FK_idCidade'] = $this->input->post('cidade');
-            
+
             $this->load->model('Fornecedor_Model');
             $idFornecedor = $this->Fornecedor_Model->inserir($dados);
-            
-            if($idFornecedor) {
+
+            if ($idFornecedor) {
                 $listaCategorias = $this->input->post('chkCategorias');
                 foreach ($listaCategorias as $categoria) {
                     $dadosCF['FK_idFornecedores'] = $idFornecedor;
@@ -259,7 +266,6 @@ class Planejamento extends CI_Controller {
             } else {
                 echo '<br>Erro: ' . $this->db->_error_number() . ' - ' . $this->db->_error_message();
             }
-            
         }
     }
 

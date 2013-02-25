@@ -44,55 +44,6 @@
             criarMascaras();
         }
     }
-    function addItemListaDinamica(controller, formulario, lista, divFormulario) {
-        
-        if ($('#formAddItem').validate().form()) {
-            $("#msg").html("Enviado Formulário...");
-            //$(formulario+" > .flash").show();
-            //$(formulario+" > .flash").fadeIn(400).html('<img src="../imagens/loader.gif" align="absmiddle"> <span class="loading">Incluindo...</span>');
-        
-            $.post("planejamento/salvar", $(formulario).serialize(), function (html) 
-            {
-                //                    $(lista).append(html);
-                //                    $(lista+":first").slideDown(300);
-                //                    $(formulario+" > .flash").hide();
-                //                    $(divFormulario).slideToggle('slow');
-                $("#msg").html(html);
-                btnCancelarItem();
-                carregarItensCasamento();
-                carregarTotaisGastos();                
-            });
-        }
-        return false;
-
-    }
-    
-    function mostrarFormulario(categoria) {
-        $('#divAddItem').slideDown("slow");
-        $('#divAddItem').insertAfter('#tblCategoria'+categoria);
-        $('#categorias').val(categoria);
-        $('#addItem').focus();
-        carregarItemFornecedorByCategoria(categoria);
-    }
-    
-    function btnCancelarItem(){
-        $('#divAddItem').hide('slow');
-        $('#divAddItem').insertAfter('#divAddItemAnchor');
-        $('#divAddItem .dinheiro').each(function(index) {
-            $(this).val("0,00");
-        });
-        $('#divAddItem .data').each(function(index) {
-            $(this).val("");
-        });
-        
-        $('#rbtnVista').click();
-        $("#formAddItem").validate().resetForm();
-    }
-    
-    function carregarItemFornecedorByCategoria(categoria) {
-        //$('#items').load('planejamento/listarItems/'+categoria);
-        $('#fornecedores').load('planejamento/listarFornecedores/'+categoria);
-    }
     
     function carregarItensCasamento() {
         $('#divItensCasamento').load('planejamento/listarItensCasamento');
@@ -131,24 +82,21 @@
         //Código do POPOVER
         $('.mnuCategoriaItem').click(function (e) {
             $('.mnuCategoriaItem').each(function (index){
-                if(e != this) {
-                    //alert(index);
-                    //$(this).popover('hide');                    
-                }
+                $(this).popover('destroy');
+                $(this).parent('li').removeClass('active');
             });
             var el = $(this);
             $.ajax({
                 url: el.attr('data-content'),
                 success: function(html){
                     el.popover({ content: html, placement:'right', html:true, trigger:'manual' }).popover("toggle");
+                    $('.arrow').offset({top: el.offset().top});
                 }
             });
-            $('.arrow').css({"top":"30%"});
             
             //Deixa o item do menu selecionado
             $(this).parent('li').toggleClass('active');            
             criarMascaras();
-            //alert(el.offset);
             return false;
         });
 
@@ -182,16 +130,6 @@
             }
         });
 
-        
-        
-        
-        /* Calcula a data execução ao alterar o item*/
-        $('#items').change(function(){
-            $.get('planejamento/calcularDataExecucao/'+$('#items').val(), function (data){
-                $('#DataExecucao').val(data);
-            });
-        });
-        
         /* Regras de Validação do Formulário Fornecedor*/
         $("#formAddFornecedor").validate({
             rules: {
@@ -218,79 +156,50 @@
     });
 </script>
 <h2>Planejamento</h2>
-<div id="divAddItemAnchor"></div>
-<div id="msg" style="font-size: 18px; color: red;">
-    <?php ?>
+<div id="msg" class="alert alert-block alert-success fade in" data-alert="alert" style="display: block; position: absolute; top: -100px; left: 5px; width: 95%;">
+    <button type="button" class="close">×</button>
+    <strong>Item inserido com sucesso!</strong>
 </div>
-<div id="divAddFornecedor" class="divFomularioListasDinamicas">
+<div id="divAddFornecedor">
     <form id="formAddFornecedor">
-        <table width="100%" border="0">
-            <tr>
-                <td class="label" width="25%"> Nome*: </td>
-                <td colspan="3">
-                    <input class="inputText" type="text" name="Nome" id="Nome" value=""> 
-                </td>
-            </tr>
-            <tr>
-                <td class="label"> Responsável*: </td>
-                <td colspan="3"> 
-                    <input class="inputText" type="text" name="Responsavel" id="Responsavel" value=""> 
+        <div class="controls controls-row">
+            <label class="span2 text-right" for="Nome"> Nome*: </label>
+            <input class="span6" type="text" name="Nome" id="Nome" value=""> 
+        </div>
+        <div class="controls controls-row">
+            <label class="span2 text-right" for="Responsavel"> Responsável*: </label>
+            <input class="span6" type="text" name="Responsavel" id="Responsavel" value=""> 
+        </div>
+        <div class="controls controls-row">
+            <label class="span2 text-right" for="Telefone"> Telefone*: </label>
+            <input class="telefone span2" type="text" name="Telefone" id="Telefone" value=""> 
+            <label class="span2 text-right" for="Celular"> Celular: </label>
+            <input class="telefone span2" type="text" name="Celular" id="Celular" value=""> 
+        </div>
+        <div class="controls controls-row">
+            <label class="span2 text-right" for="EMail"> E-Mail: </label>
+            <input class="span2" type="text" name="EMail" id="EMail" value=""> 
+            <label class="span2 text-right" for="Site"> Site: </label>
+            <input class="span2" type="text" name="Site" id="Site" value=""> 
+        </div>
+        <div class="controls controls-row">
+            <label class="span2 text-right" for="Endereco"> Endereço: </label>
+            <input class="span6" type="text" name="Endereco" id="Endereco" value=""> 
+        </div>
+        <div class="controls controls-row">
+            <label class="span2 text-right" for="UF"> Estado/Cidade*: </label>
+                <?php
+                $options = array('' => 'UF');
+                echo form_dropdown('uf', $options, '', 'id="uf" class="span2"');
+                $options = array('' => 'Cidade');
+                echo form_dropdown('cidade', $options, '', 'id="cidade" class=span4');
+                ?> 
+        </div>
+        <div class="controls controls-row">
+            <label class="span2 text-right"> Categorias: </label>
+            <div id="divListaCategorias" class="span6"></div>
 
-                </td>
-            </tr>
-            <tr>
-                <td class="label"> Telefone*: </td>
-                <td> 
-                    <input class="inputText telefone" type="text" name="Telefone" id="Telefone" value=""> 
-                </td>
-                <td class="label"> Celular: </td>
-                <td> 
-                    <input class="inputText telefone" type="text" name="Celular" id="Celular" value=""> 
-
-                </td>
-            </tr>
-            <tr>
-                <td class="label"> E-Mail: </td>
-                <td> 
-                    <input class="inputText" type="text" name="EMail" id="EMail" value=""> 
-
-                </td>
-                <td class="label"> Site: </td>
-                <td> 
-                    <input class="inputText" type="text" name="Site" id="Site" value=""> 
-
-                </td>
-            </tr>
-            <tr>
-                <td class="label"> Endereço: </td>
-                <td colspan="3"> 
-                    <input class="inputText" type="text" name="Endereco" id="Endereco" value=""> 
-                </td>
-            </tr>
-            <tr>
-                <td class="label"> Estado/Cidade*: </td>
-                <td colspan="3">
-                    <?php
-                    $options = array('' => 'UF');
-                    echo form_dropdown('uf', $options, '', 'id="uf"');
-                    ?>
-
-
-                    <?php
-                    $options = array('' => 'Cidade');
-                    echo form_dropdown('cidade', $options, '', 'id="cidade"');
-                    ?>
-
-
-                </td>
-            </tr>
-            <tr>
-                <td class="label"> Categorias*: </td>
-                <td colspan="4"> 
-                    <div id="divListaCategorias"></div>
-                </td>
-            </tr>       
-        </table>
+        </div>
     </form>
 </div>
 

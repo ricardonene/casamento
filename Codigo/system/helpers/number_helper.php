@@ -40,7 +40,7 @@ if ( ! function_exists('moedaRS'))
 	function real_format($valor = '')
 	{
             if ($valor == '')
-                return '';
+                return '0,00';
             
             return number_format($valor, 2, ',', '.');
 	}
@@ -59,7 +59,7 @@ if ( ! function_exists('mysql_format'))
 	function mysql_format($valor = '')
 	{
             if ($valor == '')
-                return '';
+                return '0.00';
             
             $valor = str_replace('.', '', $valor);
             return str_replace(',', '.', $valor);

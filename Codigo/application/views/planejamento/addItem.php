@@ -1,4 +1,41 @@
 <script type='text/javascript' language='javascript'>
+    function addItemListaDinamica(controller, formulario, lista, divFormulario) {
+        if ($('#formAddItem').validate().form()) {
+            $("#btnAddItem").val("Adicionando item...");
+            $("#btnAddItem").addClass("disabled");
+            
+            $.post("planejamento/salvar", $(formulario).serialize(), function (html) 
+            {
+                $("#btnAddItem").val("Adicionar");
+                $("#btnAddItem").removeClass("disabled");
+                cancelarItem();
+                carregarItensCasamento();
+                carregarTotaisGastos();                
+                $("#msg").html(html);
+                $("#msg").animate({top: "20"}, 500).animate({top: "5"}, 200);
+                window.setTimeout(function() { $("#msg").animate({top: "-100"}, 1200); }, 4000);
+                
+            });
+        }
+        return false;
+    }
+    
+    function cancelarItem(){
+        $('#divAddItem .dinheiro').each(function(index) {
+            $(this).val("0,00");
+        });
+        $('#divAddItem .data').each(function(index) {
+            $(this).val("");
+        });
+        
+        $('#rbtnVista').click();
+        $("#formAddItem").validate().resetForm();
+        $('.mnuCategoriaItem').each(function (index){
+            $(this).popover('destroy');
+            $(this).parent('li').removeClass('active');
+        });
+    }
+    
     $(document).ready(function(){
         criarMascaras();
         
@@ -10,19 +47,14 @@
         });
         
         /* Cria o Spinner do número de parcelas */
-        $( "#nroPrestacoes" ).spinner(
-        { min: 1 },
-        {
-            spin: function( event, ui ) {
-                calcularParcelas(ui.value);
-            }
+        $( ".spinner" ).spinner(
+        { min: 1 }, 
+        { spin: function( event, ui ) { calcularParcelas(ui.value); }
         });
         
         /* Regras de Validação do Formulário Item*/
         $("#formAddItem").validate({
             rules: {
-                categorias: {required: true},
-                items: {required: true},
                 DataExecucao: {required: true},
                 ValorPrevisto: {required: function(element) {
                         //alert(element.value == "0,00");
@@ -31,17 +63,16 @@
             },
             messages: {
                 DataExecucao: { required: "" },
-                ValorPrevisto: { required: "" },
-                categorias: {required: ""},
-                items: {required: ""}
+                ValorPrevisto: { required: "" }
             }
         });
         
     });
 </script>
-<div id="divAddItem" class="divFomularioListasDinamicas">
+<div id="divAddItem">
     <form id="formAddItem" class="form-horizontal">
         <input type="hidden" name="items" id="items" value="<?= $idItem; ?>">
+        <input type="hidden" name="categorias" id="categorias" value="<?= $idCategoria; ?>">
         <div class="control-group">
             <label class="control-label" for="DataExecucao"> Data Execução*: </label>
             <div class="controls">
@@ -60,7 +91,6 @@
                 <input class="dinheiro input-small" type="text" name="ValorContratado" id="ValorContratado" value="0,00"> 
             </div>
         </div>
-        <tr>
         <div class="control-group">
             <label class="control-label" for="ValorPago"> Pago: </label>
             <div class="controls">
@@ -89,7 +119,6 @@
                 </label>
             </div>
         </div>
-
         <div id="divPrestacoes" style="display: none;">
             <div class="control-group form-inline">
                 <label class="control-label" for="parcelaEntrada"> Entrada: </label>
@@ -103,7 +132,7 @@
             <div class="control-group">
                 <label class="control-label" for="nroPrestacoes">Nº de Prestações:</label>
                 <div class="controls">
-                    <input class="input-small" id="nroPrestacoes" name="nroPrestacoes" value="1" size="5" />
+                    <input class="input-small spinner" id="nroPrestacoes" name="nroPrestacoes" value="1" size="5" />
                 </div>
             </div>
 
@@ -111,18 +140,17 @@
                 <label class="control-label" for="parcela1">1ª Parcela:</label>
                 <div class="controls">
                     <input id="parcela1" name="parcelas[]" value="0,00" class="dinheiro input-small" />
-                    
+
                     <label for="dataParcela1"> Data: </label>
                     <input type="text" id="dataParcela1" name="dataParcelas[]" class="data input-small" />
                 </div>
             </div>
             <div id="divParcelas"></div>
         </div>
-
         <div class="control-group">
             <div class="controls">
-                <input type="button" id="addItem" value="Adicionar" class="btn btn-primary" onclick="addItemListaDinamica('veiculoController.php', '#formAddItem', '#listaVeiculos', '#divFormVeiculo')">
-                <input type="button" id="cancelarItem" value="Cancelar" class="btn" onclick="btnCancelarItem()">
+                <input type="button" id="btnAddItem" value="Adicionar" class="btn btn-primary" onclick="addItemListaDinamica('veiculoController.php', '#formAddItem', '#listaVeiculos', '#divFormVeiculo')">
+                <input type="button" id="btnCancelarItem" value="Cancelar" class="btn" onclick="cancelarItem()">
             </div>
         </div>
     </form>

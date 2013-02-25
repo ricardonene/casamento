@@ -22,12 +22,9 @@ foreach ($categorias as $categoria) {
                     <td class="itemPlanejado">R$ <?= real_format($item->ValorContratado); ?> </td>
                     <td class="itemPlanejado">R$ <?= real_format($item->ValorPago); ?> </td>
                     <td class="itemPlanejado">R$ <?= real_format($item->SaldoDevedor); ?> </td>
-                    <td class="itemPlanejado"> <?= real_format($item->Percentual); ?> 100% </td>
+                    <td class="itemPlanejado"> <?= real_format($item->Percentual); ?> % </td>
                 </tr>
             <?php } ?>
-            <tr>
-                <td colspan="6"> <input type="button" class="btn btn-small btn-primary" value="Novo Item" onclick="mostrarFormulario(<?php echo $categoria['idCategoria']; ?>);"> </td>
-            </tr>
         </tbody>
     </table>
 <?php } ?>
