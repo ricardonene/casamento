@@ -90,7 +90,7 @@
     }
     
     function carregarItemFornecedorByCategoria(categoria) {
-        $('#items').load('planejamento/listarItems/'+categoria);
+        //$('#items').load('planejamento/listarItems/'+categoria);
         $('#fornecedores').load('planejamento/listarFornecedores/'+categoria);
     }
     
@@ -128,6 +128,31 @@
         carregarUF();
         carregarCidades();
         
+        //Código do POPOVER
+        $('.mnuCategoriaItem').click(function (e) {
+            $('.mnuCategoriaItem').each(function (index){
+                if(e != this) {
+                    //alert(index);
+                    //$(this).popover('hide');                    
+                }
+            });
+            var el = $(this);
+            $.ajax({
+                url: el.attr('data-content'),
+                success: function(html){
+                    el.popover({ content: html, placement:'right', html:true, trigger:'manual' }).popover("toggle");
+                }
+            });
+            $('.arrow').css({"top":"30%"});
+            
+            //Deixa o item do menu selecionado
+            $(this).parent('li').toggleClass('active');            
+            criarMascaras();
+            //alert(el.offset);
+            return false;
+        });
+
+        
         $( '#divAddFornecedor' ).dialog({
             autoOpen: false,
             resizable: true,
@@ -157,52 +182,14 @@
             }
         });
 
-        /** Calcula as parcelas quando o usuário altera o valor:
-         *  Entrada, ValorContratado
-         */
-        $("#parcelaEntrada, #ValorContratado").keyup(function (){
-            calcularParcelas($("#nroPrestacoes").val());
-        });
         
-        /* Cria o Spinner do número de parcelas */
-        $( "#nroPrestacoes" ).spinner(
-        { min: 1 },
-        {
-            spin: function( event, ui ) {
-                calcularParcelas(ui.value);
-            }
-        }
-    );
         
-        /* Carrega os itens e fornecedores ao alterar a categoria*/
-        $('#categorias').change(function(){
-            carregarItemFornecedorByCategoria($('#categorias').val());
-        });
         
         /* Calcula a data execução ao alterar o item*/
         $('#items').change(function(){
             $.get('planejamento/calcularDataExecucao/'+$('#items').val(), function (data){
                 $('#DataExecucao').val(data);
             });
-        });
-        
-        /* Regras de Validação do Formulário Item*/
-        $("#formAddItem").validate({
-            rules: {
-                categorias: {required: true},
-                items: {required: true},
-                DataExecucao: {required: true},
-                ValorPrevisto: {required: function(element) {
-                        //alert(element.value == "0,00");
-                        return false;//(element.value == "0,00");
-                    }}
-            },
-            messages: {
-                DataExecucao: { required: "" },
-                ValorPrevisto: { required: "" },
-                categorias: {required: ""},
-                items: {required: ""}
-            }
         });
         
         /* Regras de Validação do Formulário Fornecedor*/
@@ -227,7 +214,7 @@
             }
         });
         
-        $('.mnuCategoriaItem').popover();
+        
     });
 </script>
 <h2>Planejamento</h2>
@@ -307,110 +294,24 @@
     </form>
 </div>
 
-<div id="divAddItem" class="divFomularioListasDinamicas" style="display: none;">
-    <form id="formAddItem">
-        <table width="100%" border="0">
-            <tr>
-                <td colspan="6"  class="labelCabecalho">
-                    Adicionar Item
-                </td>
-            </tr>
-            <tr>
-                <td class="label"> Categoria*: </td>
-                <td>
-                    <?php
-                    $options = array('' => 'Selecione a Categoria');
-                    foreach ($categorias as $categoria)
-                        $options[$categoria->idCategoria] = $categoria->Descricao;
-                    echo form_dropdown('categorias', $options, '', 'id="categorias"');
-                    ?>
-                </td>
-                <td class="label"> Item*: </td>
-                <td> 
-                    <?php
-                    $options = array('' => 'Selecione a Categoria');
-                    echo form_dropdown('items', $options, '', 'id="items"');
-                    ?>
-                </td>
-                <td class="label"> Data Execução*: </td>
-                <td> 
-                    <input class="inputText data" type="text" name="DataExecucao" id="DataExecucao" value=""> 
-                </td>
-            </tr>
-            <tr>
-                <td class="label"> Previsto*: </td>
-                <td> 
-                    <input class="inputText dinheiro" type="text" name="ValorPrevisto" id="ValorPrevisto" value="0,00"> 
-
-                </td>
-                <td class="label"> Contratado: </td>
-                <td> 
-                    <input class="inputText dinheiro" type="text" name="ValorContratado" id="ValorContratado" value="0,00"> 
-
-                </td>
-                <td class="label"> Pago: </td>
-                <td> 
-                    <input class="inputText dinheiro" type="text" name="ValorPago" id="ValorPago" value="0,00"> 
-
-                </td>
-            </tr>
-            <tr>
-                <td class="label"> Fornecedor: </td>
-                <td colspan="5"> 
-                    <?php
-                    $options = array('' => 'Selecione a Categoria');
-                    echo form_dropdown('fornecedores', $options, '', 'id="fornecedores"');
-                    ?>
-                    <input type="button" value="Novo Fornecedor" class="btn btn-small" onclick="novoFornecedor()">
-
-                </td>
-            </tr>
-            <tr>
-                <td class="label" colspan="2"> Pagamento: </td>
-                <td colspan="4"> 
-                    <input type="radio" name="FormaPagamento" id="rbtnVista" value="V" checked="checked" onclick="$('#divPrestacoes').hide();"> <label for="rbtnVista">À Vista</label>
-                    <input type="radio" name="FormaPagamento" id="rbtnPrazo" value="P" onclick="listarParcelas();"> <label for="rbtnPrazo">A Prazo</label>
-                    <div id="divPrestacoes" style="display: none;">
-                        <label for="parcelaEntrada">Entrada:</label>
-                        <input id="parcelaEntrada" name="parcelaEntrada" value="0,00" class="dinheiro" />
-                        Data: <input type="text" id="dataEntrada" name="dataEntrada" class="data" />
-                        <p>
-                            <label for="nroPrestacoes">Nº de Prestações:</label>
-                            <input id="nroPrestacoes" name="nroPrestacoes" value="1" size="5" />
-                        </p>
-
-                        <div id="divParcela1">
-                            <label for="parcela1">1ª Parcela:</label>
-                            <input id="parcela1" name="parcelas[]" value="0,00" class="dinheiro" />
-                            Data: <input type="text" id="dataParcela1" name="dataParcelas[]" class="data" />
-                        </div>
-                        <div id="divParcelas"></div>
-                    </div>
-
-                </td>
-            </tr>       
-            <tr>
-                <td colspan="6" class="labelRodape">
-                    <input type="button" id="addItem" value="Adicionar" class="btn btn-primary" onclick="addItemListaDinamica('veiculoController.php', '#formAddItem', '#listaVeiculos', '#divFormVeiculo')">
-                    <input type="button" id="cancelarItem" value="Cancelar" class="btn" onclick="btnCancelarItem()">
-                </td>
-            </tr>
-        </table>
-    </form>
-</div>
-
 <div class="row-fluid">
     <div id="divMenuCategorias" class="span2" style="border: solid 0px red;">
         <ul class="nav nav-list">
-            <li class="nav-header"> Fotos e Filmes </li>
-            <li><a href="#" class="mnuCategoriaItem" data-toggle="popover" data-placement="right" data-content="Vivamus <br/>v" title="" data-original-title="Adicionar Item"> Fotógrafo </a></li>
-            <li><a href="#"> Filmagem </a></li>
-        </ul>
+            <?php
+            foreach ($menuCategorias as $categoria) {
+                ?>
+                <li class="nav-header"> <?php echo $categoria['Categoria']; ?> </li>
+                <?php foreach ($categoria['itens'] as $item) { ?>
+                    <li>
+                        <a href="#" class="mnuCategoriaItem" data-toggle="popover" data-placement="right" data-categoria="<?= $categoria['idCategoria']; ?>" data-idItem="<?= $item->idItem; ?>" data-content="planejamento/addItem/<?= $item->idItem; ?>/<?= $categoria['idCategoria']; ?>" title="" data-original-title="Adicionar <?= $item->Descricao; ?>"> 
+                            <i class="icon-camera"></i>
+                            <?= $item->Descricao; ?> 
+                        </a>
+                    </li>
+                <?php } ?>
 
-        <ul class="nav nav-list">
-            <li class="nav-header"> Cerimônia Civil e Religiosa </li>
-            <li><a href="#" class="mnuCategoriaItem" data-toggle="popover" data-placement="right" data-content="Vivamus " title="" data-original-title="Adicionar Item"> Fotógrafo </a></li>
-            <li><a href="#"> Filmagem </a></li>
+
+            <?php } ?>
         </ul>
     </div>
     <div id="divItensCasamento" class="span7" style="border: solid 0px red;"></div>

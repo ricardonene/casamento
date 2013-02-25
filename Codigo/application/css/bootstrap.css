@@ -1944,7 +1944,7 @@ legend + .control-group {
 }
 
 .form-horizontal .control-group {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   *zoom: 1;
 }
 
@@ -5380,7 +5380,7 @@ input[type="submit"].btn.btn-mini {
   left: 0;
   z-index: 1010;
   display: none;
-  max-width: 276px;
+  max-width: 500px;
   padding: 1px;
   text-align: left;
   white-space: normal;
@@ -5418,7 +5418,7 @@ input[type="submit"].btn.btn-mini {
   padding: 8px 14px;
   margin: 0;
   font-size: 14px;
-  font-weight: normal;
+  font-weight: bold;
   line-height: 18px;
   background-color: #f7f7f7;
   border-bottom: 1px solid #ebebeb;

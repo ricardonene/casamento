@@ -1193,7 +1193,9 @@
             tp = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth}
             break
           case 'right':
-            tp = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width}
+            var t = pos.top + pos.height / 2 - actualHeight / 2;
+            t = t < 0 ? 5 : t;
+            tp = {top: t, left: pos.left + pos.width}
             break
         }
 

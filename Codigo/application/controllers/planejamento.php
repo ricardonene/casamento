@@ -24,6 +24,18 @@ class Planejamento extends CI_Controller {
         $this->load->model('Categoria_Model');
         $dados['categorias'] = $this->Categoria_Model->listarTodos();
 
+        $this->load->model('Item_Model');
+        $itens = $this->Item_Model->listarTodos();
+        $lista = NULL;
+        if ($itens) {
+            foreach ($itens as $item) {
+                $lista[$item->idCategoria]['idCategoria'] = $item->idCategoria;
+                $lista[$item->idCategoria]['Categoria'] = $item->Categoria;
+                $lista[$item->idCategoria]['itens'][] = $item;
+            }
+            $dados['menuCategorias'] = $lista;
+        }
+        
         $this->template->load('templates/templatePadrao', 'planejamentoView', $dados);
     }
 
@@ -32,8 +44,8 @@ class Planejamento extends CI_Controller {
         $options[''] = 'Selecione o Item';
 
         if ($idCategoria != false) {
-            $this->load->model('Item');
-            $dados = $this->Item->listarItemsPorCategoria($idCategoria);
+            $this->load->model('Item_Model');
+            $dados = $this->Item_Model->listarItemsPorCategoria($idCategoria);
 
             foreach ($dados as $item) {
                 $options[$item['idItem']] = $item['Descricao'];
@@ -89,18 +101,19 @@ class Planejamento extends CI_Controller {
 
     public function calcularDataExecucao($idItem = '') {
         if ($idItem != '') {
-            $this->load->model('Item');
-            $meses = $this->Item->obterMesesAntes($idItem);
+            $this->load->model('Item_Model');
+            $meses = $this->Item_Model->obterMesesAntes($idItem);
             $dataCasamento = $this->session->userdata('DataCasamento');
             $dataExecucao = subtraiMeses($dataCasamento, $meses);
             $hoje = date('d/m/Y');
 
             if (dataAMenorDataB($hoje, $dataExecucao)) {
-                echo $dataExecucao;
+                return $dataExecucao;
             } else {
-                echo $hoje;
+                return $hoje;
             }
         }
+        return '';
     }
 
     public function listarItensCasamento() {
@@ -119,6 +132,22 @@ class Planejamento extends CI_Controller {
         }
     }
     
+    public function menuCategoriasItens() {
+        $this->load->model('Item_Model');
+        $itens = $this->Item_Model->listarTodos();
+        $lista = NULL;
+        if ($itens) {
+            foreach ($itens as $item) {
+                $lista[$item->idCategoria]['idCategoria'] = $item->idCategoria;
+                $lista[$item->idCategoria]['Categoria'] = $item->Categoria;
+                $lista[$item->idCategoria]['itens'][] = $item;
+            }
+            $lista['categorias'] = $lista;
+
+            $this->load->view('planejamento/menuCategorias', $lista);
+        }
+    }
+    
     public function totalGastos() {
         $this->load->model('ItemCasamento_Model');
         $totais = $this->ItemCasamento_Model->obterTotalGastos($this->session->userdata('idCasamento'));
@@ -129,7 +158,30 @@ class Planejamento extends CI_Controller {
         }
     }
     
-    
+    public function addItem($idItem = '', $idCategoria = FALSE, $ultimo = FALSE) {
+        
+        $dados['DataExecucao'] = $this->calcularDataExecucao($idItem);
+        
+        $dados['idItem'] = $idItem;
+        
+        $optionsFornecedor[''] = 'Selecione o Fornecedor';
+        if ($idCategoria != FALSE) {
+            $this->load->model('Fornecedor_Model');
+            $fornecedores = $this->Fornecedor_Model->listarPorCategoria($idCategoria);
+            $selecionado = 0;
+            foreach ($fornecedores as $fornecedor) {
+                $optionsFornecedor[$fornecedor['idFornecedores']] = $fornecedor['Nome'];
+                if($ultimo) {
+                    if ($selecionado < $fornecedor['idFornecedores']) {
+                        $selecionado = $fornecedor['idFornecedores'];
+                    }
+                }
+            }
+        }
+        $dados['optionsFornecedor'] = $optionsFornecedor;
+        
+        $this->load->view('planejamento/addItem', $dados);
+    }
 
     public function salvar() {
         $sucesso = FALSE;
