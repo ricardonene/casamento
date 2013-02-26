@@ -163,7 +163,7 @@
 <div id="divAddFornecedor">
     <form id="formAddFornecedor">
         <div class="controls controls-row">
-            <label class="span2 text-right" for="Nome"> Nome*: </label>
+            <label class="span2 text-right" for="Nome"> Razão Social*: </label>
             <input class="span6" type="text" name="Nome" id="Nome" value=""> 
         </div>
         <div class="controls controls-row">
