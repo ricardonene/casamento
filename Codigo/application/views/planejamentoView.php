@@ -223,6 +223,6 @@
             <?php } ?>
         </ul>
     </div>
-    <div id="divItensCasamento" class="span7" style="border: solid 0px red;"></div>
+    <div id="divItensCasamento" class="span7" style="border: solid 1px red;"></div>
     <div id="divTotalGastos" class="span2" style="border: solid 1px red;"></div>
 </div>

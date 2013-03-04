@@ -1,3 +1,90 @@
+#container {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    display: table;
+    *zoom: 1;
+    background-color: red;
+}
+
+#header {
+    background-color: #999; 
+    height: 75px;
+}
+
+#logo {
+
+}
+
+#maincontent {
+    background-color: #333;
+    display: table;
+    width: 100%;
+}
+
+#navigation {
+    width: 140px;
+    float: left;
+    background-color: #333;
+}
+
+#contents {
+    width: auto;
+    background-color: #fff;
+    float: left;
+}
+
+ul.menu {
+    margin-bottom: 20px;
+    margin-left: 0;
+    list-style: none;
+}
+
+ul.menu > li {
+    margin: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 20px;
+    text-align: center;
+    height: 100px;
+    text-transform: uppercase;
+    border-top: solid 1px #666;
+    border-bottom: solid 1px #000;
+}
+
+ul.menu > li:hover, ul.menu > li.active {
+    margin-left: 10px;
+    margin-right: 0px;
+    padding-right: 10px;
+    background-color: #00d1e5;
+    color: #444;
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-bottom-left-radius: 8px;
+    -moz-border-radius-topleft: 8px;
+    -moz-border-radius-bottomleft: 8px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+ul.menu > li > a > i {
+    height: 40px;
+    width: 40px;
+    margin-bottom: 10px;
+}
+
+ul.menu > li > a {
+    text-decoration: none;
+    color: #00d1e5;
+}
+
+ul.menu > li.active > a, ul.menu > li:hover {
+    text-decoration: none;
+    color: #333;
+}
+
+
+
+
 @corTitulo: #008F8B;
 @tamanhoListaItem: 80%;
 

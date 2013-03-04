@@ -4,14 +4,14 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        
+
         <title><?php echo $titulo; ?></title>
 
         <link href="<?php echo base_url('application/css/bootstrap.css') ?>" rel="stylesheet" />
 <!--        <link href="<?php echo base_url('application/css/bootstrap-responsive.css') ?>" rel="stylesheet" />-->
         <link href="<?php echo base_url('application/css/jquery-ui-1.10.0.custom.css') ?>" rel="stylesheet" />
         <link href="<?php echo base_url('application/css/principal.css') ?>" rel="stylesheet/less" media="screen" type="text/css" />
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script src="<?php echo base_url('application/js/jquery-ui-1.10.0.custom.js') ?>"></script>
         <script src="<?php echo base_url('application/js/less-1.3.3.min.js') ?>"></script>
@@ -23,28 +23,57 @@
         <script src="<?php echo base_url('application/js/bootstrap.js') ?>"></script>       
     </head>
     <body>
-        <div id="container" class="container-fluid">
-            <div id="header" class="row-fluid" style="border: solid 0px red;">
-                <div id="logo" class="span2">
+        <div id="container">
+            <div id="header">
+                <div id="logo">
                     <a href="#"> <img src="http://www.halfdiscount.com/resizedMerImage/1251883038.gif"/> </a>
-                </div>
-                <div id="navigation" class="span8">
-                        <ul class="nav nav-pills">
-                            <li><a href="<?php echo base_url() ?>">Início</a></li>
-                            <li class="active"><a href="<?php echo base_url('planejamento') ?>">Planejamento</a></li>
-                            <li><a href="convidados">Convidados</a></li>
-                            <li><a href="financeiro">Financeiro</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Contato</a></li>
-                            <li><a href="logout">Sair</a></li>
-                        </ul>
-                </div>
+                </div>                
             </div>
-            <div id="content" class="row-fluid" style="border: solid 0px green;">
-                <?php echo $contents ?>
-            </div>
-            <div id="footer" class="row-fluid" style="background-color: gray;">
-                <p class="text-center"> Copyright © 2013 </p>
+
+            <div id="maincontent">
+                <div id="navigation">
+                    <ul class="menu">
+                        <li>
+                            <a href="<?php echo base_url() ?>">
+                                <i class="icon-home icon-white"></i> <br />
+                                Início
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="<?php echo base_url('planejamento') ?>">
+                                <i class="icon-home icon-white"></i> <br />
+                                Planejamento
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="icon-home icon-white"></i> <br />
+                                <a href="convidados">Convidados
+                                </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="icon-home icon-white"></i> <br />
+                                Financeiro
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="icon-home icon-white"></i> <br />
+                                Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="icon-home icon-white"></i> <br />
+                                Contato
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="contents">
+                    <?php echo $contents ?>
+                </div>
             </div>
         </div>
     </body>
