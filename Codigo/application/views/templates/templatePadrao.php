@@ -12,7 +12,7 @@
         <link href="<?php echo base_url('application/css/jquery-ui-1.10.0.custom.css') ?>" rel="stylesheet" />
         <link href="<?php echo base_url('application/css/principal.css') ?>" rel="stylesheet/less" media="screen" type="text/css" />
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script src="<?php echo base_url('application/js/jquery-1.9.1.min.js') ?>"></script>
         <script src="<?php echo base_url('application/js/jquery-ui-1.10.0.custom.js') ?>"></script>
         <script src="<?php echo base_url('application/js/less-1.3.3.min.js') ?>"></script>
         <script src="<?php echo base_url('application/js/jquery.maskMoney.js') ?>"></script>
@@ -26,49 +26,58 @@
         <div id="container">
             <div id="header">
                 <div id="logo">
-                    <a href="#"> <img src="http://www.halfdiscount.com/resizedMerImage/1251883038.gif"/> </a>
+                    <a href="#"> <!--img src="http://www.halfdiscount.com/resizedMerImage/1251883038.gif"/--> </a>
                 </div>                
             </div>
 
             <div id="maincontent">
                 <div id="navigation">
                     <ul class="menu">
-                        <li>
-                            <a href="<?php echo base_url() ?>">
-                                <i class="icon-home icon-white"></i> <br />
+                        <a href="<?php echo base_url() ?>">
+                            <li>
+
                                 Início
-                            </a>
-                        </li>
-                        <li class="active">
-                            <a href="<?php echo base_url('planejamento') ?>">
-                                <i class="icon-home icon-white"></i> <br />
+
+                            </li>
+                        </a>
+                        <a href="<?php echo base_url('planejamento') ?>">
+                            <li>
+
+                                <i class="icone-planejamento"></i> <br />
                                 Planejamento
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon-home icon-white"></i> <br />
-                                <a href="convidados">Convidados
-                                </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon-home icon-white"></i> <br />
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li>
+
+                                <i class="icone-convidados"></i> <br />
+                                Convidados
+
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li>
+
+                                <i class="icone-financeiro"></i> <br />
                                 Financeiro
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon-home icon-white"></i> <br />
+
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li>
+
+                                <i class="icone-blog"></i> <br />
                                 Blog
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon-home icon-white"></i> <br />
+
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li>
+                                <i class="icone-contato"></i> <br />
                                 Contato
-                            </a>
-                        </li>
+
+                            </li>
+                        </a>
                     </ul>
                 </div>
                 <div id="contents">

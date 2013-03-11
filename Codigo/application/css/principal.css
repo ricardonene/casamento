@@ -40,19 +40,23 @@ ul.menu {
     list-style: none;
 }
 
-ul.menu > li {
+ul.menu > a > li {
     margin: 0px;
     margin-left: 10px;
     margin-right: 10px;
     padding-top: 20px;
     text-align: center;
-    height: 100px;
+    height: 80px;
     text-transform: uppercase;
     border-top: solid 1px #666;
     border-bottom: solid 1px #000;
 }
 
-ul.menu > li:hover, ul.menu > li.active {
+ul.menu > a > li:last-child {
+    border-bottom: 0px;
+}
+
+ul.menu > a > li:hover, ul.menu > a > li.active {
     margin-left: 10px;
     margin-right: 0px;
     padding-right: 10px;
@@ -66,22 +70,79 @@ ul.menu > li:hover, ul.menu > li.active {
     border-bottom-left-radius: 8px;
 }
 
-ul.menu > li > a > i {
-    height: 40px;
-    width: 40px;
-    margin-bottom: 10px;
-}
 
-ul.menu > li > a {
+ul.menu > a {
     text-decoration: none;
     color: #00d1e5;
 }
 
-ul.menu > li.active > a, ul.menu > li:hover {
+ul.menu > a > li > i {
+    margin-bottom: 10px;
+}
+
+ul.menu > li.active > a,
+ul.menu > li > a:hover,
+ul.menu > li:hover {
     text-decoration: none;
     color: #333;
 }
 
+[class^="icone-"],
+[class*=" icone-"] {
+    display: inline-block;
+    width: 51px;
+    height: 40px;
+    margin-top: 1px;
+    *margin-right: .3em;
+    line-height: 40px;
+    vertical-align: text-top;
+    background-image: url("../img/iconesLaterais.png");
+    background-position: 40px 40px;
+    background-repeat: no-repeat;
+}
+
+.icone-inicial {
+    background-position: -3px -4px;
+}
+.icone-inicial:hover {
+    background-position: -66px -4px;
+}
+
+.icone-planejamento {
+    background-position: -3px -45px;
+}
+.icone-planejamento:hover {
+    background-position: -66px -45px;
+}
+
+.icone-convidados {
+    background-position: -3px -86px;
+}
+.icone-convidados:hover {
+    background-position: -66px -86px;
+}
+
+.icone-financeiro {
+    background-position: -3px -129px;
+}
+.icone-financeiro:hover {
+    background-position: -66px -129px;
+}
+
+.icone-blog {
+    background-position: -3px -170px;
+}
+.icone-blog:hover
+{
+    background-position: -66px -170px;
+}
+
+.icone-contato {
+    background-position: -2px -213px;
+}
+.icone-contato:hover {
+    background-position: -65px -213px;
+}
 
 
 
@@ -120,6 +181,3 @@ ul.menu > li.active > a, ul.menu > li:hover {
     padding: 5px;
     font-weight: bold;
 }
-
-
-
