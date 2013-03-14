@@ -203,7 +203,7 @@
 </div>
 
 <div class="row-fluid" style="width: 1100px;">
-    <div id="divMenuCategorias" class="submenu" style="width: 200px; float: left; border: solid 0px red;">
+    <div id="divMenuCategorias" class="submenu" style="width: 220px; float: left; border: solid 0px red;">
         <ul class="nav nav-list">
             <li class="nav-header"></li>
             <?php
