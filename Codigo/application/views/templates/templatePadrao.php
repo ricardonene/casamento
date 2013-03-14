@@ -33,51 +33,50 @@
             <div id="maincontent">
                 <div id="navigation">
                     <ul class="menu">
-                        <a href="<?php echo base_url() ?>">
-                            <li>
-
+                        <li>
+                            <a href="<?php echo base_url() ?>">
+                                <i class="icone-inicial"></i> <br />
                                 Início
+                            </a>
 
-                            </li>
-                        </a>
-                        <a href="<?php echo base_url('planejamento') ?>">
-                            <li>
+                        </li>
+                        <li class="active">
+                            <a href="<?php echo base_url('planejamento') ?>">
 
                                 <i class="icone-planejamento"></i> <br />
                                 Planejamento
-                            </li>
-                        </a>
-                        <a href="#">
-                            <li>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
 
                                 <i class="icone-convidados"></i> <br />
                                 Convidados
-
-                            </li>
-                        </a>
-                        <a href="#">
-                            <li>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
 
                                 <i class="icone-financeiro"></i> <br />
                                 Financeiro
+                            </a>
 
-                            </li>
-                        </a>
-                        <a href="#">
-                            <li>
+                        </li>
+                        <li>
+                            <a href="#">
 
                                 <i class="icone-blog"></i> <br />
                                 Blog
+                            </a>
 
-                            </li>
-                        </a>
-                        <a href="#">
-                            <li>
+                        </li>
+                        <li>
+                            <a href="#">
                                 <i class="icone-contato"></i> <br />
                                 Contato
 
-                            </li>
-                        </a>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div id="contents">

@@ -155,7 +155,6 @@
         
     });
 </script>
-<h2>Planejamento</h2>
 <div id="msg" class="alert alert-block alert-success fade in" data-alert="alert" style="display: block; position: absolute; top: -100px; left: 5px; width: 95%;">
     <button type="button" class="close">×</button>
     <strong>Item inserido com sucesso!</strong>
@@ -188,12 +187,12 @@
         </div>
         <div class="controls controls-row">
             <label class="span2 text-right" for="UF"> Estado/Cidade*: </label>
-                <?php
-                $options = array('' => 'UF');
-                echo form_dropdown('uf', $options, '', 'id="uf" class="span2"');
-                $options = array('' => 'Cidade');
-                echo form_dropdown('cidade', $options, '', 'id="cidade" class=span4');
-                ?> 
+            <?php
+            $options = array('' => 'UF');
+            echo form_dropdown('uf', $options, '', 'id="uf" class="span2"');
+            $options = array('' => 'Cidade');
+            echo form_dropdown('cidade', $options, '', 'id="cidade" class=span4');
+            ?> 
         </div>
         <div class="controls controls-row">
             <label class="span2 text-right"> Categorias: </label>
@@ -203,13 +202,17 @@
     </form>
 </div>
 
-<div class="row-fluid">
-    <div id="divMenuCategorias" class="span2" style="border: solid 0px red;">
+<div class="row-fluid" style="width: 1100px;">
+    <div id="divMenuCategorias" class="submenu" style="width: 200px; float: left; border: solid 0px red;">
         <ul class="nav nav-list">
+            <li class="nav-header"></li>
             <?php
             foreach ($menuCategorias as $categoria) {
                 ?>
-                <li class="nav-header"> <?php echo $categoria['Categoria']; ?> </li>
+                <li class="nav-header"> 
+                    <?php echo $categoria['Categoria']; ?> 
+                    <i class="icon-chevron-right icon-white pull-right"></i>
+                </li>
                 <?php foreach ($categoria['itens'] as $item) { ?>
                     <li>
                         <a href="#" class="mnuCategoriaItem" data-toggle="popover" data-placement="right" data-categoria="<?= $categoria['idCategoria']; ?>" data-idItem="<?= $item->idItem; ?>" data-content="planejamento/addItem/<?= $item->idItem; ?>/<?= $categoria['idCategoria']; ?>" title="" data-original-title="Adicionar <?= $item->Descricao; ?>"> 
@@ -218,11 +221,10 @@
                         </a>
                     </li>
                 <?php } ?>
-
-
             <?php } ?>
+            <li class="nav-header"></li>
         </ul>
     </div>
-    <div id="divItensCasamento" class="span7" style="border: solid 1px red;"></div>
-    <div id="divTotalGastos" class="span2" style="border: solid 1px red;"></div>
+    <div id="divItensCasamento" class="span7" style="border: solid 0px red;"></div>
+    <div id="divTotalGastos" class="span2" style="border: solid 0px red;"></div>
 </div>

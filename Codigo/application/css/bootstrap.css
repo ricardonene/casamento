@@ -222,12 +222,12 @@ textarea {
 }
 
 body {
-  margin: 0;
+  margin: 5px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
   color: #333333;
-  background-color: #ffffff;
+  background-color: #999;
 }
 
 a {
@@ -3963,30 +3963,43 @@ input[type="submit"].btn.btn-mini {
 
 .nav-header {
   display: block;
-  padding: 3px 15px;
-  font-size: 11px;
-  font-weight: bold;
-  line-height: 20px;
-  color: #999999;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  text-transform: uppercase;
+  padding: 3px 2px;
+  font-size: 14px;
+/*  font-weight: bold;*/
+  line-height: 30px;
+  color: #FFF;
+/*  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);*/
+/*  text-transform: uppercase;*/
+  border-bottom: solid 1px #34a8b5;
+  border-top: solid 1px #65e6f1;
 }
 
 .nav li + .nav-header {
-  margin-top: 9px;
+  margin-top: 0px;
 }
 
 .nav-list {
   padding-right: 15px;
   padding-left: 15px;
   margin-bottom: 0;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.nav-list li {
+    display: none;
+}
+
+.nav-list li.nav-header {
+    display: block;
 }
 
 .nav-list > li > a,
 .nav-list .nav-header {
   margin-right: -15px;
   margin-left: -15px;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+/*  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);*/
+    
 }
 
 .nav-list > li > a {
