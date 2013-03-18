@@ -1,4 +1,31 @@
-@verdeAgua: #00d1e5;
+/*Roxo*/
+@corSecundaria: #D1BCC3;
+@corSecundariaEscura: #885E6F;
+@corSecundariaClara: #E3D7DD;
+
+@corPrincipal: #73456C;
+@corPrincipalEscura: #40263E;
+@corPrincipalClara: #B685B1;
+
+/*Preto e Amarelo pastel*/
+@corSecundaria: #FDFBD4;
+@corSecundariaEscura: #F4E135;
+@corSecundariaClara: #FFF;
+
+@corPrincipal: #444;
+@corPrincipalEscura: #000;
+@corPrincipalClara: #888888;
+
+/*Coral*/
+@corSecundaria: #FF9968;
+@corSecundariaEscura: #F4E135;
+@corSecundariaClara: #FFF;
+
+@corPrincipal: #8FBD98;
+@corPrincipalEscura: #980101;
+@corPrincipalClara: #FE9292;
+
+@textoSecundario: @corPrincipal;
 
 #container {
     width: 100%;
@@ -29,9 +56,9 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
 
     -webkit-box-shadow:  0px 5px 0px 0px rgba(6, 6, 6, 0.5);
-       -moz-box-shadow:  0px 5px 0px rgba(6, 6, 6, 0.1);
-             box-shadow: 0px 5px 0px 0px rgba(6, 6, 6, 0.5);
-    border-bottom: solid 2px #999;
+    -moz-box-shadow:  0px 5px 0px rgba(6, 6, 6, 0.1);
+    box-shadow: 0px 5px 0px 0px rgba(6, 6, 6, 0.5);
+    border-bottom: solid 2px #666;
 }
 
 #logo {
@@ -39,7 +66,7 @@
 }
 
 #maincontent {
-    background-color: #333;
+    background-color: @corPrincipal;
     display: table;
     width: 100%;
 }
@@ -47,7 +74,7 @@
 #navigation {
     width: 140px;
     float: left;
-    background-color: #333;
+    background-color: @corPrincipal;
 }
 
 #contents {
@@ -70,8 +97,8 @@ ul.menu li {
     text-align: center;
     height: 80px;
     text-transform: uppercase;
-    border-top: solid 1px #666;
-    border-bottom: solid 1px #000;
+    border-top: solid 1px @corPrincipalClara;
+    border-bottom: solid 1px @corPrincipalEscura;
 }
 
 ul.menu li:last-child {
@@ -82,7 +109,7 @@ ul.menu li:hover, ul.menu li.active {
     margin-left: 10px;
     margin-right: 0px;
     padding-right: 10px;
-    background-color: @verdeAgua;
+    background-color: @corSecundaria;
     color: #444;
     -webkit-border-top-left-radius: 8px;
     -webkit-border-bottom-left-radius: 8px;
@@ -95,7 +122,7 @@ ul.menu li:hover, ul.menu li.active {
 
 ul.menu li a {
     text-decoration: none;
-    color: #00d1e5;
+    color: @corSecundaria;
 }
 
 ul.menu li i {
@@ -110,7 +137,7 @@ ul.menu li.active i {
 ul.menu li.active a,
 ul.menu li:hover a {
     text-decoration: none;
-    color: #333;
+    color: @corPrincipal;
 }
 
 [class^="icone-"],
@@ -171,7 +198,7 @@ ul.menu li:hover a {
 }
 
 .submenu {
-    background-color: @verdeAgua;
+    background-color: @corSecundaria;
     display: table;
     height: 500px;
 }
@@ -179,6 +206,12 @@ ul.menu li:hover a {
 .submenu [class^="icon-"],
 .submenu [class*=" icon-"] {
     margin-top: 7px;
+}
+
+.submenu .nav-header {
+    color: @textoSecundario;
+    border-bottom: solid 1px @corSecundariaEscura;
+    border-top: solid 1px @corSecundariaClara;
 }
 
 .submenu .nav-header:first-child {

@@ -3964,11 +3964,11 @@ input[type="submit"].btn.btn-mini {
 .nav-header {
   display: block;
   padding: 3px 2px;
-  font-size: 13px;
+  font-size: 10pt;
   font-weight: bold;
   line-height: 30px;
-  color: #999;
-  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.5);
+  color: #fff;
+/*  text-shadow: 0 2px 0 rgba(200, 200, 200, 0.5);*/
 /*  text-transform: uppercase;*/
   border-bottom: solid 1px #34a8b5;
   border-top: solid 1px #65e6f1;
