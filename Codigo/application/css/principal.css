@@ -16,15 +16,6 @@
 @corPrincipalEscura: #000;
 @corPrincipalClara: #888888;
 
-/*Coral*/
-@corSecundaria: #FF9968;
-@corSecundariaEscura: #F4E135;
-@corSecundariaClara: #FFF;
-
-@corPrincipal: #8FBD98;
-@corPrincipalEscura: #980101;
-@corPrincipalClara: #FE9292;
-
 @textoSecundario: @corPrincipal;
 
 #container {

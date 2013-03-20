@@ -6,7 +6,7 @@ class Login extends CI_Controller {
 	{
             $this->load->model("Categoria");
             
-            $dados["titulo"] = "Vou Casar.com";
+            $dados["titulo"] = "Planning Life 2 - planninglife2.com.br";
             $dados["texto"] = $this->Categoria->listarTodos();
             $this->load->view("login",$dados);
 	}
