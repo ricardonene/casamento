@@ -35,8 +35,8 @@ class Planejamento extends CI_Controller {
             }
             $dados['menuCategorias'] = $lista;
         }
-
-        $this->template->load('templates/templatePadrao', 'planejamentoView', $dados);
+        
+        $this->template->load('templates/padrao', 'planejamentoView', $dados);
     }
 
     public function listarItems($idCategoria = false) {

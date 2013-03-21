@@ -155,11 +155,11 @@
         
     });
 </script>
-<div id="msg" class="alert alert-block alert-success fade in" data-alert="alert" style="display: block; position: absolute; top: -100px; left: 5px; width: 95%;">
+<div id="msg" class="alert alert-block alert-success fade in" data-alert="alert" style="display: none; position: absolute; top: -100px; left: 5px; width: 95%;">
     <button type="button" class="close">×</button>
     <strong>Item inserido com sucesso!</strong>
 </div>
-<div id="divAddFornecedor">
+<div id="divAddFornecedor" style="display: none;">
     <form id="formAddFornecedor">
         <div class="controls controls-row">
             <label class="span2 text-right" for="Nome"> Razão Social*: </label>
