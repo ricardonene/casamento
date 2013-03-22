@@ -78,26 +78,29 @@
         carregarTotaisGastos();
         carregarUF();
         carregarCidades();
-        
+        $('#btnTeste').popover();
+        $('.mnuCategoriaItem').popover();
         //Código do POPOVER
         $('.mnuCategoriaItem').click(function (e) {
-            $('.mnuCategoriaItem').each(function (index){
-                $(this).popover('destroy');
-                $(this).parent('li').removeClass('active');
-            });
-            var el = $(this);
-            $.ajax({
-                url: el.attr('data-content'),
-                success: function(html){
-                    el.popover({ content: html, placement:'right', html:true, trigger:'manual' }).popover("toggle");
-                    $('.arrow').offset({top: el.offset().top});
-                }
-            });
-            
-            //Deixa o item do menu selecionado
-            $(this).parent('li').toggleClass('active');            
-            criarMascaras();
-            return false;
+            //$(this).popover();
+//            $('.mnuCategoriaItem').each(function (index){
+//                $(this).popover('destroy');
+//                //$(this).parent('li').removeClass('active');
+//            });
+//            var el = $(this);
+//            $.ajax({
+//                url: el.attr('data-content'),
+//                success: function(html){
+//                    alert(html);
+//                    el.popover({ content: html, placement:'right', html:true, trigger:'manual' }).popover("toggle");
+//                    $('.arrow').offset({top: el.offset().top});
+//                }
+//            });
+//            
+//            //Deixa o item do menu selecionado
+//            //$(this).parent('li').toggleClass('active');            
+//            //criarMascaras();
+//            return false;
         });
 
         
@@ -155,10 +158,7 @@
         
     });
 </script>
-<div id="msg" class="alert alert-block alert-success fade in" data-alert="alert" style="display: none; position: absolute; top: -100px; left: 5px; width: 95%;">
-    <button type="button" class="close">×</button>
-    <strong>Item inserido com sucesso!</strong>
-</div>
+
 <div id="divAddFornecedor" style="display: none;">
     <form id="formAddFornecedor">
         <div class="controls controls-row">
@@ -202,29 +202,52 @@
     </form>
 </div>
 
-<div class="row-fluid" style="width: 1100px;">
-    <div id="divMenuCategorias" class="submenu" style="width: 220px; float: left; border: solid 0px red;">
-        <ul class="nav nav-list">
-            <li class="nav-header"></li>
-            <?php
-            foreach ($menuCategorias as $categoria) {
-                ?>
-                <li class="nav-header"> 
-                    <?php echo $categoria['Categoria']; ?> 
-                    <i class="icon-chevron-right icon-white pull-right"></i>
+<!-- aside -->	
+<aside>	
+
+    <div class="divider"></div>
+    <h1>Selecione um Item</h1>
+    <!-- aside item: Menu -->
+    <div class="sidebar-nav-fixed">
+
+        <ul class="menu" id="accordion-menu-js">
+            <?php foreach ($menuCategorias as $categoria) { ?>
+                <li class=""> 
+                    <a href="javascript:void(0)"> <?php echo $categoria['Categoria']; ?> </a>
+                    <ul>
+                        <?php foreach ($categoria['itens'] as $item) { ?>
+                            <li>
+                                <a href="#" class="mnuCategoriaItem expanded" data-toggle="popover" data-placement="right" data-categoria="<?= $categoria['idCategoria']; ?>" data-idItem="<?= $item->idItem; ?>" data-content="planejamento/addItem/<?= $item->idItem; ?>/<?= $categoria['idCategoria']; ?>" title="" data-original-title="Adicionar <?= $item->Descricao; ?>"> 
+                                    
+                                    <?= $item->Descricao; ?> 
+                                </a>
+                            </li>
+                        <?php } ?>
+                    </ul>
                 </li>
-                <?php foreach ($categoria['itens'] as $item) { ?>
-                    <li>
-                        <a href="#" class="mnuCategoriaItem" data-toggle="popover" data-placement="right" data-categoria="<?= $categoria['idCategoria']; ?>" data-idItem="<?= $item->idItem; ?>" data-content="planejamento/addItem/<?= $item->idItem; ?>/<?= $categoria['idCategoria']; ?>" title="" data-original-title="Adicionar <?= $item->Descricao; ?>"> 
-                            <i class="icon-camera"></i>
-                            <?= $item->Descricao; ?> 
-                        </a>
-                    </li>
-                <?php } ?>
             <?php } ?>
-            <li class="nav-header"></li>
         </ul>
+
     </div>
-    <div id="divItensCasamento" class="span7" style="border: solid 0px red;"></div>
-    <div id="divTotalGastos" class="span2" style="border: solid 0px red;"></div>
+    <div class="divider"></div>
+
+</aside>
+<!-- aside end -->
+
+
+<!-- main content -->
+<div id="page-content">
+    <!-- page header -->
+    <h1 id="page-header"> <?= $titulo; ?> </h1>
+    <a href="#" id="btnTeste" class="btn btn-large btn-danger" data-toggle="popover" title="" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">Click to toggle popover</a>
+    <div class="row-fluid" style="height: 1100px;">
+        <div id="divItensCasamento" class="span7" style="border: solid 1px red;"></div>
+        <div id="divTotalGastos" class="span2" style="border: solid 1px red;"></div>
+    </div>
+
 </div>
+<!-- end main content -->
+
+
+
+

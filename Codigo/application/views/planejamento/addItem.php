@@ -46,11 +46,11 @@
             calcularParcelas($("#nroPrestacoes").val());
         });
         
-        /* Cria o Spinner do número de parcelas */
-        $( ".spinner" ).spinner(
-        { min: 1 }, 
-        { spin: function( event, ui ) { calcularParcelas(ui.value); }
-        });
+//        /* Cria o Spinner do número de parcelas */
+//        $( ".spinner" ).spinner(
+//        { min: 1 }, 
+//        { spin: function( event, ui ) { calcularParcelas(ui.value); }
+//        });
         
         /* Regras de Validação do Formulário Item*/
         $("#formAddItem").validate({

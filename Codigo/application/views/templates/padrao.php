@@ -83,6 +83,159 @@
         <link rel="apple-touch-startup-image" href="<?php echo base_url('application/img/splash/ipad-portrait.png') ?>" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)" />
         <link rel="apple-touch-startup-image" href="<?php echo base_url('application/img/splash/iphone.png') ?>" media="screen and (max-device-width: 320px)" />
 
+        <!-- Placed at the end of the document so the pages load faster -->
+
+        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js') ?>"></script>
+        <script>window.jQuery || document.write('<script src="<?php echo base_url('application/js/libs/jquery.min.js') ?>"><\/script>')</script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js') ?>"></script>
+        <script>window.jQuery.ui || document.write('<script src="<?php echo base_url('application/js/libs/jquery.ui.min.js') ?>"><\/script>')</script>
+
+        <!-- IMPORTANT: Jquery Touch Punch is always placed under Jquery UI -->
+        <script src="<?php echo base_url('application/js/include/jquery.ui.touch-punch.min.js') ?>"></script>
+
+        <!-- REQUIRED: Datatable components -->
+        <script src="<?php echo base_url('application/js/include/jquery.accordion.min.js') ?>"></script>
+
+        <!-- REQUIRED: Toastr & Jgrowl notifications  -->
+        <script src="<?php echo base_url('application/js/include/toastr.min.js') ?>"></script>
+        <script src="<?php echo base_url('application/js/include/jquery.jgrowl.min.js') ?>"></script>
+
+        <!-- REQUIRED: Sleek scroll UI  -->
+        <script src="<?php echo base_url('application/js/include/slimScroll.min.js') ?>"></script>
+
+        <!-- REQUIRED: Datatable components -->
+        <!-- DISABLED <script src="<?php echo base_url('application/js/include/jquery.dataTables.min.js') ?>"></script> -->
+        <!-- DISABLED <script src="<?php echo base_url('application/js/include/DT_bootstrap.min.js') ?>"></script> -->
+
+        <script type="text/javascript">
+            var ismobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));	
+            if(!ismobile){
+	    	
+                /** ONLY EXECUTE THESE CODES IF MOBILE DETECTION IS FALSE **/
+	    	
+                /* REQUIRED: Datatable PDF/Excel output componant */
+	    	
+                /*-- document.write('<script src="<?php echo base_url('application/js/include/ZeroClipboard.min.js') ?>"><\/script>'); --*/
+                /*-- document.write('<script src="<?php echo base_url('application/js/include/TableTools.min.js') ?>"><\/script>'); --*/
+                /*-- document.write('<script src="<?php echo base_url('application/js/include/jquery.uniform.min.js') ?>"><\/script>'); --*/
+                /*-- document.write('<script src="<?php echo base_url('application/js/include/select2.min.js') ?>"><\/script>'); --*/
+                document.write('<script src="<?php echo base_url('application/js/include/jquery.excanvas.min.js') ?>"><\/script>');
+                document.write('<script src="<?php echo base_url('application/js/include/jquery.placeholder.min.js') ?>"><\/script>');
+	    	
+                /** DEMO SCRIPTS **/
+                $(function() {
+                    /* show tooltips */
+                    $.jGrowl("I am the <strong>smartest Admin Template</strong> on <strong>wrapbootstrap.com</strong>. Don't forget to check out all my pages.", { 
+                        header: 'Welcome, I am Jarvis!', 
+                        sticky: false,
+                        life: 5000,
+                        speed: 500,
+                        theme: 'with-icon',
+                        position: 'top-right', //this is default position
+                        easing: 'easeOutBack',
+                        animateOpen: { 
+                            height: "show"
+                        },
+                        animateClose: { 
+                            opacity: 'hide' 
+                        }
+                    });	
+                });
+                /** end DEMO SCRIPTS **/
+	        
+            }else{
+	    	
+                /** ONLY EXECUTE THESE CODES IF MOBILE DETECTION IS TRUE **/
+	    	
+                document.write('<script src="<?php echo base_url('application/js/include/selectnav.min.js') ?>"><\/script>');
+                document.write('<script src="<?php echo base_url('application/js/include/responsive-tables.min.js') ?>"><\/script>');
+            }
+        </script>
+
+        <!-- REQUIRED: iButton -->
+        <!-- DISABLED <script src="<?php echo base_url('application/js/include/jquery.ibutton.min.js') ?>"></script> -->
+
+        <!-- REQUIRED: Justgage animated charts -->
+    <!-- DISABLED <script src="<?php echo base_url('application/js/include/justgage.min.js') ?>"></script> -->
+    <!-- DISABLED <script src="<?php echo base_url('application/js/include/raphael.2.1.0.min.js') ?>"></script> -->
+
+        <!-- REQUIRED: Animated pie chart -->
+        <script src="<?php echo base_url('application/js/include/jquery.easy-pie-chart.min.js') ?>"></script>
+
+        <!-- REQUIRED: Functional Widgets -->
+        <script src="<?php echo base_url('application/js/include/jarvis.widget.min.js') ?>"></script>
+        <script src="<?php echo base_url('application/js/include/mobiledevices.min.js') ?>"></script>
+        <!-- DISABLED (only needed for IE7 <script src="<?php echo base_url('application/js/include/json2.js') ?>"></script> -->
+
+        <!-- REQUIRED: Full Calendar -->
+        <script src="<?php echo base_url('application/js/include/jquery.fullcalendar.min.js') ?>"></script>		
+
+        <!-- REQUIRED: Flot Chart Engine -->
+        <script src="<?php echo base_url('application/js/include/jquery.flot.cust.min.js') ?>"></script>			
+        <script src="<?php echo base_url('application/js/include/jquery.flot.resize.min.js') ?>"></script>		
+        <script src="<?php echo base_url('application/js/include/jquery.flot.tooltip.min.js') ?>"></script>		
+        <!-- DISABLED <script src="<?php echo base_url('application/js/include/jquery.flot.orderBar.min.js') ?>"></script> -->	
+        <!-- DISABLED <script src="<?php echo base_url('application/js/include/jquery.flot.fillbetween.min.js') ?>"></script> -->	
+        <!-- DISABLED <script src="<?php echo base_url('application/js/include/jquery.flot.pie.min.js') ?>"></script> --> 	 
+
+        <!-- REQUIRED: Sparkline Charts -->
+        <script src="<?php echo base_url('application/js/include/jquery.sparkline.min.js') ?>"></script>
+
+        <!-- REQUIRED: Infinite Sliding Menu (used with inbox page) -->
+        <!-- DISABLED  <script src="<?php echo base_url('application/js/include/jquery.inbox.slashc.sliding-menu.js') ?>"></script> -->
+
+        <!-- REQUIRED: Form validation plugin -->
+        <script src="<?php echo base_url('application/js/include/jquery.validate.min.js') ?>"></script>
+
+        <!-- REQUIRED: Progress bar animation -->
+        <script src="<?php echo base_url('application/js/include/bootstrap-progressbar.min.js') ?>"></script>
+
+        <!-- REQUIRED: wysihtml5 editor -->
+        <script src="<?php echo base_url('application/js/include/wysihtml5-0.3.0.min.js') ?>"></script>
+        <script src="<?php echo base_url('application/js/include/bootstrap-wysihtml5.min.js') ?>"></script>
+
+        <!-- REQUIRED: Masked Input -->
+        <script src="<?php echo base_url('application/js/include/jquery.maskedinput.min.js') ?>"></script>
+
+        <!-- REQUIRED: Bootstrap Date Picker -->
+        <script src="<?php echo base_url('application/js/include/bootstrap-datepicker.min.js') ?>"></script>
+
+        <!-- REQUIRED: Bootstrap Wizard -->
+        <!-- DISABLED  <script src="<?php echo base_url('application/js/include/bootstrap.wizard.min.js') ?>"></script> -->
+
+        <!-- REQUIRED: Bootstrap Color Picker -->
+    <!-- DISABLED  <script src="<?php echo base_url('application/js/include/bootstrap-colorpicker.min.js') ?>"></script> -->
+
+
+        <!-- REQUIRED: Bootstrap Time Picker -->
+    <!-- DISABLED  <script src="<?php echo base_url('application/js/include/bootstrap-timepicker.min.js') ?>"></script> -->
+
+        <!-- REQUIRED: Bootstrap Prompt -->
+        <!-- DISABLED  <script src="<?php echo base_url('application/js/include/bootbox.min.js') ?>"></script> -->
+
+        <!-- REQUIRED: Bootstrap engine -->
+        <!-- DISABLED  <script src="<?php echo base_url('application/js/include/bootstrap.min.js') ?>"></script> -->
+        <script src="<?php echo base_url('application/js/bootstrap.js') ?>"></script>       
+
+        <!-- DO NOT REMOVE: Theme Config file -->
+        <script src="<?php echo base_url('application/js/config.js') ?>"></script>
+
+        <!-- d3 library placed at the bottom for better performance -->
+        <!-- DISABLED  <script src="<?php echo base_url('application/js/include/d3.v3.min.js') ?>"></script> -->
+        <!-- DISABLED  <script src="<?php echo base_url('application/js/include/adv_charts/d3-chart-1.js') ?>"></script> -->
+        <!-- DISABLED  <script src="<?php echo base_url('application/js/include/adv_charts/d3-chart-2.js') ?>"></script> -->
+
+        <!-- Google Geo Chart -->
+        <!-- DISABLED <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script> -->
+        <!-- DISABLED <script type='text/javascript' src='https://www.google.com/jsapi'></script>-->
+        <!-- DISABLED <script src="<?php echo base_url('application/js/include/adv_charts/geochart.js') ?>"></script> -->
+
+        <script src="<?php echo base_url('application/js/jquery.maskMoney.js') ?>"></script>
+        <script src="<?php echo base_url('application/js/script.js') ?>"></script>       
+
+        <!-- end scripts -->
+
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 
     <body>
@@ -254,91 +407,8 @@
             <div id="main" role="main" class="container-fluid">
                 <div class="contained">
 
-                    <!-- main content -->
-                    <div id="page-content">
-                        <!-- page header -->
-                        <h1 id="page-header">Planejamento</h1>
-                        <?php echo $contents ?>
+                    <?php echo $contents ?>
 
-
-                    </div>
-                    <!-- end main content -->
-
-                    <!-- aside right on high res -->
-                    <aside class="right">
-
-                        <!-- sparkline stats -->
-                        <ul class="mystats indented">
-                            <li class="first">
-                                <h1><span>My Balance:</span>$17,349</h1>
-                                <div class="mychart" id="balance" style="width:35px"></div>
-                            </li>
-                            <li>
-                                <h1><span>Impressions:</span>145k+</h1>
-                                <div class="mychart" id="clicks" style="width:35px"></div>
-                            </li>
-                            <li>
-                                <h1><span>Subscribers:</span>1,120</h1>
-                                <div class="mychart" id="subscribe" style="width:35px"></div>
-                            </li>
-                            <li class="last">
-                                <h1><span>Support Ticket:</span>945+</h1>
-                                <div class="mychart" id="support" style="width:35px"></div>
-                            </li>
-                        </ul>
-                        <div class="divider"></div>
-                        <!-- end sparkline stats -->
-
-                        <!-- aside progress bars -->
-                        <ul class="indented aside-progress-stats">
-                            <li>
-                                <!-- easy pie chart -->
-                                <div class="easypie">
-                                    <div class="percentage" data-percent="68">
-                                        <span>68</span>%
-                                    </div>
-                                    <div class="easypie-text">
-                                        Server load
-                                    </div>
-                                </div>
-                                <!-- end easy pie chart -->
-                            </li>
-                            <li>
-                                <strong>Data Restored</strong><strong class="pull-right">90%</strong>
-                                <div class="progress progress-danger slim"><div class="bar" data-percentage="90"></div></div>
-                            </li>
-                            <li>
-                                <strong>Recovering IDE</strong><strong class="pull-right">66%</strong>
-                                <div class="progress progress-info slim"><div class="bar" data-percentage="66"></div></div>
-                            </li>
-                            <li>
-                                <strong>DLL Construction</strong><strong class="pull-right">48%</strong>
-                                <div class="progress progress-info slim"><div class="bar" data-percentage="48"></div></div>
-                            </li>
-                            <li>
-                                <strong>Machine Req</strong><strong class="pull-right">33%</strong>
-                                <div class="progress progress-info slim"><div class="bar" data-percentage="33"></div></div>
-                            </li>
-                        </ul>
-                        <div class="divider"></div>
-                        <!-- end aside progress bars -->
-
-                        <!-- date picker -->
-                        <div id="datepicker"></div>
-                        <div class="divider"></div>
-                        <!-- end date picker -->
-
-                        <!-- aside buttons -->
-                        <div class="aside-buttons">
-                            <a href="javascript:void(0);" title="" class="btn btn-info">Ricardo an Invoice</a>
-                            <a href="javascript:void(0);" title="" class="btn btn-success">New Campaign</a>
-                            <a href="javascript:void(0);" title="" class="btn btn-danger">Delete Progress</a>
-                        </div>
-                        <div class="divider"></div>
-                        <!-- end aside buttons -->
-                    </aside>
-
-                    <!-- end aside right -->
                 </div>
 
             </div><!--end fluid-container-->
@@ -353,153 +423,6 @@
         <!-- end footer -->
 
         <!--================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
 
-        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js') ?>"></script>
-        <script>window.jQuery || document.write('<script src="<?php echo base_url('application/js/libs/jquery.min.js') ?>"><\/script>')</script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js') ?>"></script>
-        <script>window.jQuery.ui || document.write('<script src="<?php echo base_url('application/js/libs/jquery.ui.min.js') ?>"><\/script>')</script>
-
-        <!-- IMPORTANT: Jquery Touch Punch is always placed under Jquery UI -->
-        <script src="<?php echo base_url('application/js/include/jquery.ui.touch-punch.min.js') ?>"></script>
-
-        <!-- REQUIRED: Datatable components -->
-        <script src="<?php echo base_url('application/js/include/jquery.accordion.min.js') ?>"></script>
-
-        <!-- REQUIRED: Toastr & Jgrowl notifications  -->
-        <script src="<?php echo base_url('application/js/include/toastr.min.js') ?>"></script>
-        <script src="<?php echo base_url('application/js/include/jquery.jgrowl.min.js') ?>"></script>
-
-        <!-- REQUIRED: Sleek scroll UI  -->
-        <script src="<?php echo base_url('application/js/include/slimScroll.min.js') ?>"></script>
-
-        <!-- REQUIRED: Datatable components -->
-        <!-- DISABLED <script src="<?php echo base_url('application/js/include/jquery.dataTables.min.js') ?>"></script> -->
-        <!-- DISABLED <script src="<?php echo base_url('application/js/include/DT_bootstrap.min.js') ?>"></script> -->
-
-        <script type="text/javascript">
-            var ismobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));	
-            if(!ismobile){
-	    	
-                /** ONLY EXECUTE THESE CODES IF MOBILE DETECTION IS FALSE **/
-	    	
-                /* REQUIRED: Datatable PDF/Excel output componant */
-	    	
-                /*-- document.write('<script src="<?php echo base_url('application/js/include/ZeroClipboard.min.js') ?>"><\/script>'); --*/
-                /*-- document.write('<script src="<?php echo base_url('application/js/include/TableTools.min.js') ?>"><\/script>'); --*/
-                /*-- document.write('<script src="<?php echo base_url('application/js/include/jquery.uniform.min.js') ?>"><\/script>'); --*/
-                /*-- document.write('<script src="<?php echo base_url('application/js/include/select2.min.js') ?>"><\/script>'); --*/
-                document.write('<script src="<?php echo base_url('application/js/include/jquery.excanvas.min.js') ?>"><\/script>');
-                document.write('<script src="<?php echo base_url('application/js/include/jquery.placeholder.min.js') ?>"><\/script>');
-	    	
-                /** DEMO SCRIPTS **/
-                $(function() {
-                    /* show tooltips */
-                    $.jGrowl("I am the <strong>smartest Admin Template</strong> on <strong>wrapbootstrap.com</strong>. Don't forget to check out all my pages.", { 
-                        header: 'Welcome, I am Jarvis!', 
-                        sticky: false,
-                        life: 5000,
-                        speed: 500,
-                        theme: 'with-icon',
-                        position: 'top-right', //this is default position
-                        easing: 'easeOutBack',
-                        animateOpen: { 
-                            height: "show"
-                        },
-                        animateClose: { 
-                            opacity: 'hide' 
-                        }
-                    });	
-                });
-                /** end DEMO SCRIPTS **/
-	        
-            }else{
-	    	
-                /** ONLY EXECUTE THESE CODES IF MOBILE DETECTION IS TRUE **/
-	    	
-                document.write('<script src="<?php echo base_url('application/js/include/selectnav.min.js') ?>"><\/script>');
-                document.write('<script src="<?php echo base_url('application/js/include/responsive-tables.min.js') ?>"><\/script>');
-            }
-        </script>
-
-        <!-- REQUIRED: iButton -->
-        <!-- DISABLED <script src="<?php echo base_url('application/js/include/jquery.ibutton.min.js') ?>"></script> -->
-
-        <!-- REQUIRED: Justgage animated charts -->
-    <!-- DISABLED <script src="<?php echo base_url('application/js/include/justgage.min.js') ?>"></script> -->
-    <!-- DISABLED <script src="<?php echo base_url('application/js/include/raphael.2.1.0.min.js') ?>"></script> -->
-
-        <!-- REQUIRED: Animated pie chart -->
-        <script src="<?php echo base_url('application/js/include/jquery.easy-pie-chart.min.js') ?>"></script>
-
-        <!-- REQUIRED: Functional Widgets -->
-        <script src="<?php echo base_url('application/js/include/jarvis.widget.min.js') ?>"></script>
-        <script src="<?php echo base_url('application/js/include/mobiledevices.min.js') ?>"></script>
-        <!-- DISABLED (only needed for IE7 <script src="<?php echo base_url('application/js/include/json2.js') ?>"></script> -->
-
-        <!-- REQUIRED: Full Calendar -->
-        <script src="<?php echo base_url('application/js/include/jquery.fullcalendar.min.js') ?>"></script>		
-
-        <!-- REQUIRED: Flot Chart Engine -->
-        <script src="<?php echo base_url('application/js/include/jquery.flot.cust.min.js') ?>"></script>			
-        <script src="<?php echo base_url('application/js/include/jquery.flot.resize.min.js') ?>"></script>		
-        <script src="<?php echo base_url('application/js/include/jquery.flot.tooltip.min.js') ?>"></script>		
-        <!-- DISABLED <script src="<?php echo base_url('application/js/include/jquery.flot.orderBar.min.js') ?>"></script> -->	
-        <!-- DISABLED <script src="<?php echo base_url('application/js/include/jquery.flot.fillbetween.min.js') ?>"></script> -->	
-        <!-- DISABLED <script src="<?php echo base_url('application/js/include/jquery.flot.pie.min.js') ?>"></script> --> 	 
-
-        <!-- REQUIRED: Sparkline Charts -->
-        <script src="<?php echo base_url('application/js/include/jquery.sparkline.min.js') ?>"></script>
-
-        <!-- REQUIRED: Infinite Sliding Menu (used with inbox page) -->
-        <!-- DISABLED  <script src="<?php echo base_url('application/js/include/jquery.inbox.slashc.sliding-menu.js') ?>"></script> -->
-
-        <!-- REQUIRED: Form validation plugin -->
-    <!-- DISABLED <script src="<?php echo base_url('application/js/include/jquery.validate.min.js') ?>"></script> -->
-
-        <!-- REQUIRED: Progress bar animation -->
-        <script src="<?php echo base_url('application/js/include/bootstrap-progressbar.min.js') ?>"></script>
-
-        <!-- REQUIRED: wysihtml5 editor -->
-        <script src="<?php echo base_url('application/js/include/wysihtml5-0.3.0.min.js') ?>"></script>
-        <script src="<?php echo base_url('application/js/include/bootstrap-wysihtml5.min.js') ?>"></script>
-
-        <!-- REQUIRED: Masked Input -->
-    <!-- DISABLED  <script src="<?php echo base_url('application/js/include/jquery.maskedinput.min.js') ?>"></script> -->
-
-        <!-- REQUIRED: Bootstrap Date Picker -->
-        <script src="<?php echo base_url('application/js/include/bootstrap-datepicker.min.js') ?>"></script>
-
-        <!-- REQUIRED: Bootstrap Wizard -->
-        <!-- DISABLED  <script src="<?php echo base_url('application/js/include/bootstrap.wizard.min.js') ?>"></script> -->
-
-        <!-- REQUIRED: Bootstrap Color Picker -->
-    <!-- DISABLED  <script src="<?php echo base_url('application/js/include/bootstrap-colorpicker.min.js') ?>"></script> -->
-
-
-        <!-- REQUIRED: Bootstrap Time Picker -->
-    <!-- DISABLED  <script src="<?php echo base_url('application/js/include/bootstrap-timepicker.min.js') ?>"></script> -->
-
-        <!-- REQUIRED: Bootstrap Prompt -->
-        <!-- DISABLED  <script src="<?php echo base_url('application/js/include/bootbox.min.js') ?>"></script> -->
-
-        <!-- REQUIRED: Bootstrap engine -->
-        <script src="<?php echo base_url('application/js/include/bootstrap.min.js') ?>"></script>
-
-        <!-- DO NOT REMOVE: Theme Config file -->
-        <script src="<?php echo base_url('application/js/config.js') ?>"></script>
-
-        <!-- d3 library placed at the bottom for better performance -->
-        <!-- DISABLED  <script src="<?php echo base_url('application/js/include/d3.v3.min.js') ?>"></script> -->
-        <!-- DISABLED  <script src="<?php echo base_url('application/js/include/adv_charts/d3-chart-1.js') ?>"></script> -->
-        <!-- DISABLED  <script src="<?php echo base_url('application/js/include/adv_charts/d3-chart-2.js') ?>"></script> -->
-
-        <!-- Google Geo Chart -->
-        <!-- DISABLED <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script> -->
-        <!-- DISABLED <script type='text/javascript' src='https://www.google.com/jsapi'></script>-->
-        <!-- DISABLED <script src="<?php echo base_url('application/js/include/adv_charts/geochart.js') ?>"></script> -->
-
-        <!-- end scripts -->
     </body>
 </html>
